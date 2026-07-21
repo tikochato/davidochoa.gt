@@ -1,71 +1,71 @@
-# tikochato.tk
-Personal WebPage
+# davidochoa.gt
 
-Aerial by HTML5 UP
-html5up.net | @ajlkn
-Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+Personal landing page for David Ochoa — Senior Software Engineer.
 
+A single-page, single-screen static site. No build step, no dependencies, no
+JavaScript framework: one `index.html` plus static assets, served directly by
+GitHub Pages.
 
-This is Aerial, a single page, single screen responsive site template. Real simple.
-Makes heavy use of CSS animation (something I've been messing with a lot lately).
-Should work well as a landing page that just directs folks to your stuff elsewhere
-on the www. Sass sources are also included, so if you've never used Sass and you're
-interested in giving it a try, head on over to sass-lang.com (and if not, you can
-safely delete the "sass/" folder).
+## Structure
 
-The scrolling mountainous background was derived from "Icefields" by Ryan Schroeder,
-a talented photographer from Vancouver who graciously released it on Unsplash under
-the CC0 license. Be sure to check out his other stuff over at flickr (link below)
-as well as all the other kickass CC0-licensed images at Unsplash (unsplash.com).
+```
+index.html            The entire page — header, links, footer
+CNAME                 Custom domain for GitHub Pages (davidochoa.gt)
+assets/
+  css/main.css        Compiled stylesheet (generated from assets/sass)
+  css/ie8.css         Legacy IE fallbacks
+  css/ie9.css
+  css/images/bg.jpg   Scrolling background (1500px wide, horizontally tileable)
+  fonts/              Font Awesome webfonts, used for the social icons
+  js/ie/              html5shiv, respond.js, CSS3 PIE — legacy IE shims only
+  sass/               Sass sources for the CSS above
+```
 
-Questions/comments/issues = just email or find me on Twitter. Have fun!
+## Local preview
 
-AJ
-aj@lkn.io | @ajlkn
+No tooling required — open `index.html` in a browser, or serve the folder:
 
+```sh
+python3 -m http.server 8000
+```
 
-The Scrolling Background:
+Then visit http://localhost:8000.
 
-	This relies entirely on CSS to do its thing, which is cool, but that makes
-	changing it a bit weird/tricky at first. You can still use pretty much any image
-	you want, but for best results make sure yours is:
+## Editing content
 
-	- Horizontally tileable.
-	- Wide and short.
-	- About 1500px wide.
-	- Fades to a solid color either at the top of bottom (which is used to fill
-	  the empty space above or below your image).
+Everything user-facing lives in `index.html`:
 
-	Now, there are two ways to use it: with CSS, or with Sass:
+- **Headline and taglines** — the `<h1>` and two `<p>` elements in `#header`.
+- **Social links** — the `<nav>` list. Icons come from Font Awesome class names
+  (`fa-github`, `fa-linkedin-square`, …), so swapping an icon means swapping that
+  class. Delete unused entries rather than pointing them at `#`.
+- **Metadata** — `<title>`, `description`, and the Open Graph tags in `<head>`
+  drive search results and link previews. `og:url` and `og:image` are absolute
+  and hardcoded to `https://davidochoa.gt`, so they need updating if the domain
+  changes.
 
-	CSS:
+## Editing styles
 
-		Look for this line in css/style.css (line 108 as of this writing):
+`assets/css/main.css` is compiled output. Edit `assets/sass/main.scss` and
+recompile rather than patching the CSS directly:
 
-			background: #348cb2 url("images/bg.jpg") bottom left;
+```sh
+sass assets/sass/main.scss assets/css/main.css
+```
 
-		and use it to set the page background color, URL, and placement of
-		your image. It should be as close to 1500px wide as you can get it.
+If you never plan to touch the styles, `assets/sass/` can be deleted safely.
 
-	Sass:
+### The scrolling background
 
-		Set the value of $bg to the page background color, URL, and placement
-		of your image. Change $bg-width if your image is something other than
-		1500px wide.
+The animation is pure CSS. A replacement for `assets/css/images/bg.jpg` should be
+horizontally tileable, wide and short, roughly 1500px wide, and fade to a solid
+color at the top or bottom — that color fills the empty space above and below.
+Set the background color, URL, and placement via `$bg` in
+`assets/sass/libs/_vars.scss`, adjusting `$bg-width` if the image isn't 1500px.
 
+## Deployment
 
-Credits:
-
-	Background Image:
-		Ryan Schroeder via Unsplash (unsplash.com - CC0 licensed)
-			"Icefields" (flickr.com/photos/ryanschroeder/11876741703)
-
-	Icons:
-		Font Awesome (fortawesome.github.com/Font-Awesome)
-
-	Other:
-		html5shiv.js (@afarkas @jdalton @jon_neal @rem)
-		CSS3 PIE (css3pie.com)
-		Sass (sass-lang.com)
-		Respond.js (j.mp/respondjs)
-		Skel (skel.io)
+Pushing to `master` publishes via GitHub Pages. The custom domain comes from the
+`CNAME` file, and only resolves once DNS at the registrar points at GitHub —
+either an `ALIAS`/`ANAME` on the apex to `tikochato.github.io`, or `A` records to
+`185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
