@@ -31,7 +31,7 @@ export function Landing() {
       <div className="relative z-10 flex h-full flex-col justify-end px-5 pb-10 sm:px-12 sm:pb-14">
         <div className="mb-10 flex items-end justify-between gap-6">
           <LocationBadge />
-          <p className="hidden max-w-[280px] text-right text-[13px] leading-relaxed tracking-[0.04em] text-white/80 sm:block">
+          <p className="hidden max-w-[280px] text-right text-[13px] leading-relaxed tracking-[0.04em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:block">
             {site.heroLine}
           </p>
         </div>
@@ -55,7 +55,7 @@ function LocationBadge() {
     <div className="flex items-center gap-5">
       <div className="relative h-[90px] w-[90px] text-white">
         <div className="absolute inset-[18px] rounded-full bg-canvas" />
-        <svg viewBox="0 0 100 100" className="spin-slow h-full w-full">
+        <svg viewBox="0 0 100 100" className="spin-slow h-full w-full drop-shadow-[0_1px_3px_rgba(0,0,0,0.8)]">
           <defs>
             <path
               id="circlePath"
@@ -64,6 +64,7 @@ function LocationBadge() {
           </defs>
           <text
             className="fill-white text-[11px] uppercase"
+            fill="#ffffff"
             xmlSpace="preserve"
             textLength="232.5"
             lengthAdjust="spacing"
@@ -77,7 +78,7 @@ function LocationBadge() {
           ✦
         </span>
       </div>
-      <p className="max-w-[9rem] text-[12px] leading-snug tracking-[0.04em] text-white sm:hidden">
+      <p className="max-w-[9rem] text-[12px] leading-snug tracking-[0.04em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:hidden">
         Located in {site.location}
       </p>
     </div>

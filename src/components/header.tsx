@@ -11,23 +11,40 @@ import { site } from "@/data/site";
 const ease = [0.76, 0, 0.24, 1] as const;
 const SCROLL_IN = 80;
 const SCROLL_OUT = 40;
+const HERO_CLEARANCE = 24;
 
 export function Header() {
   const { setMenuOpen, menuOpen } = useSite();
   const [scrolled, setScrolled] = useState(false);
+  const [overHero, setOverHero] = useState(false);
 
   useEffect(() => {
     const update = () => {
       const y = window.scrollY;
       setScrolled((prev) => (prev ? y > SCROLL_OUT : y > SCROLL_IN));
+      const hero = document.getElementById("home");
+      setOverHero(
+        hero ? hero.getBoundingClientRect().bottom > HERO_CLEARANCE : false,
+      );
     };
     update();
     window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 mix-blend-difference">
+    <header
+      className={cn(
+        "pointer-events-none fixed inset-x-0 top-0 z-50 text-white",
+        overHero
+          ? "[text-shadow:0_1px_10px_rgba(0,0,0,0.65)]"
+          : "mix-blend-difference",
+      )}
+    >
       <div className="flex items-start justify-between px-5 pt-6 sm:px-10 sm:pt-8">
         <Magnetic>
           <Link
