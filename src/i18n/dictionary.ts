@@ -48,12 +48,10 @@ export const es = {
     messageLabel: "Tu mensaje",
     messagePlaceholder: "Hola {name}, ¿me puedes ayudar con… *",
     send: "Enviar",
-    sentTitle: "Mensaje listo.",
-    sentBody:
-      "Debería abrirse tu cliente de correo con la nota. Si no, escribe directo a {email}.",
-    mailName: "Nombre",
-    mailEmail: "Correo",
-    mailSubject: "Nueva consulta de {name}",
+    sending: "Enviando…",
+    sentTitle: "Mensaje enviado.",
+    sentBody: "Gracias por escribir. Te responderé lo antes posible.",
+    error: "No se pudo enviar el mensaje. Inténtalo de nuevo.",
   },
   work: {
     label: "Trabajo",
@@ -134,12 +132,10 @@ export const en = {
     messageLabel: "Your message",
     messagePlaceholder: "Hello {name}, can you help me with... *",
     send: "Send it",
-    sentTitle: "Message ready.",
-    sentBody:
-      "Your mail client should open with the note. If it does not, write directly to {email}.",
-    mailName: "Name",
-    mailEmail: "Email",
-    mailSubject: "New inquiry from {name}",
+    sending: "Sending…",
+    sentTitle: "Message sent.",
+    sentBody: "Thanks for reaching out. I'll get back to you as soon as possible.",
+    error: "The message could not be sent. Please try again.",
   },
   work: {
     label: "Work",

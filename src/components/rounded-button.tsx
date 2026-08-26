@@ -11,6 +11,7 @@ type RoundedButtonProps = {
   background?: string;
   className?: string;
   dark?: boolean;
+  disabled?: boolean;
 };
 
 export function RoundedButton({
@@ -20,6 +21,7 @@ export function RoundedButton({
   background = "#455ce9",
   className,
   dark = false,
+  disabled = false,
 }: RoundedButtonProps) {
   const [hover, setHover] = useState(false);
 
@@ -49,6 +51,7 @@ export function RoundedButton({
   const classes = cn(
     "relative flex cursor-pointer items-center justify-center overflow-hidden rounded-full px-8 py-5 text-[15px] tracking-[0.04em]",
     dark ? "bg-[#1c1d20] text-white" : "bg-white text-canvas",
+    disabled ? "cursor-wait opacity-70" : undefined,
     className,
   );
 
@@ -83,6 +86,7 @@ export function RoundedButton({
       type={onClick ? "button" : "submit"}
       className={classes}
       onClick={onClick}
+      disabled={disabled}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >

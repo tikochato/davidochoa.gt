@@ -7,36 +7,47 @@ import { useLocale } from "@/components/locale-provider";
 import { site } from "@/data/site";
 import { interpolate } from "@/i18n/config";
 
+type SubmitStatus = "idle" | "sending" | "sent" | "error";
+
 export function ContactForm() {
   const { dictionary } = useLocale();
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<SubmitStatus>("idle");
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    if (status === "sending") return;
+
+    setStatus("sending");
     const data = new FormData(event.currentTarget);
-    const name = String(data.get("name") || "");
-    const email = String(data.get("email") || "");
-    const message = String(data.get("message") || "");
+    const form = event.currentTarget;
 
-    const body = [
-      `${dictionary.form.mailName}: ${name}`,
-      `${dictionary.form.mailEmail}: ${email}`,
-      "",
-      message,
-    ].join("\n");
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          message: data.get("message"),
+          website: data.get("website"),
+        }),
+      });
 
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
-      interpolate(dictionary.form.mailSubject, { name }),
-    )}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+      if (!response.ok) throw new Error("Contact request failed.");
+
+      form.reset();
+      setStatus("sent");
+    } catch {
+      setStatus("error");
+    }
   }
 
-  if (sent) {
+  if (status === "sent") {
     return (
-      <div className="rounded-[10px] bg-white/5 p-10">
+      <div className="rounded-[10px] bg-white/5 p-10" role="status">
         <h2 className="font-display text-[40px]">{dictionary.form.sentTitle}</h2>
         <p className="mt-4 max-w-[40ch] text-[16px] leading-relaxed text-white/70">
-          {interpolate(dictionary.form.sentBody, { email: site.email })}
+          {dictionary.form.sentBody}
         </p>
       </div>
     );
@@ -73,10 +84,30 @@ export function ContactForm() {
         />
       </Field>
 
+      <div className="absolute -left-[9999px]" aria-hidden="true">
+        <label htmlFor="contact-website">Website</label>
+        <input
+          id="contact-website"
+          name="website"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+
+      {status === "error" ? (
+        <p className="pt-6 text-[14px] text-red-300" role="alert">
+          {dictionary.form.error}
+        </p>
+      ) : null}
+
       <div className="flex justify-end pt-10">
         <Magnetic>
-          <RoundedButton className="h-[180px] w-[180px] px-0 py-0">
-            {dictionary.form.send}
+          <RoundedButton
+            className="h-[180px] w-[180px] px-0 py-0"
+            disabled={status === "sending"}
+          >
+            {status === "sending" ? dictionary.form.sending : dictionary.form.send}
           </RoundedButton>
         </Magnetic>
       </div>
