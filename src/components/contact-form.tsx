@@ -5,8 +5,6 @@ import { Magnetic } from "@/components/magnetic";
 import { RoundedButton } from "@/components/rounded-button";
 import { site } from "@/data/site";
 
-const services = ["Web design", "Web development", "Product UI", "Something else"];
-
 export function ContactForm() {
   const [sent, setSent] = useState(false);
 
@@ -15,18 +13,9 @@ export function ContactForm() {
     const data = new FormData(event.currentTarget);
     const name = String(data.get("name") || "");
     const email = String(data.get("email") || "");
-    const company = String(data.get("company") || "");
-    const service = String(data.get("service") || "");
     const message = String(data.get("message") || "");
 
-    const body = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Company: ${company}`,
-      `Service: ${service}`,
-      "",
-      message,
-    ].join("\n");
+    const body = [`Name: ${name}`, `Email: ${email}`, "", message].join("\n");
 
     window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(`New inquiry from ${name}`)}&body=${encodeURIComponent(body)}`;
     setSent(true);
@@ -63,19 +52,7 @@ export function ContactForm() {
           className="field-input"
         />
       </Field>
-      <Field index="03" label="What's the name of your organization?">
-        <input name="company" placeholder="John & Doe ®" className="field-input" />
-      </Field>
-      <Field index="04" label="What services are you looking for?">
-        <select name="service" defaultValue={services[0]} className="field-input">
-          {services.map((service) => (
-            <option key={service} value={service}>
-              {service}
-            </option>
-          ))}
-        </select>
-      </Field>
-      <Field index="05" label="Your message">
+      <Field index="03" label="Your message">
         <textarea
           required
           name="message"

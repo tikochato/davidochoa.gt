@@ -27,10 +27,12 @@ export function RoundedButton({
     <>
       <span
         aria-hidden
-        className="absolute left-1/2 top-full h-[150%] w-[150%] -translate-x-1/2 rounded-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
+        className="pointer-events-none absolute left-1/2 top-full h-[150%] w-[150%] rounded-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)]"
         style={{
           background,
-          transform: hover ? "translate(-50%, -70%) scale(1)" : "translate(-50%, 0%) scale(0.4)",
+          transform: hover
+            ? "translate(-50%, -76%) scale(1)"
+            : "translate(-50%, 0%) scale(0.4)",
         }}
       />
       <span
