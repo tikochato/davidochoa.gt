@@ -11,7 +11,7 @@ export const site = {
   languages: ["Spanish", "English"],
   github: "https://github.com/tikochato",
   linkedin: "https://www.linkedin.com/in/tikochato/",
-  ogImage: "/opengraph-image",
+  ogImage: "/og.png",
 } as const;
 
 export const focus = [

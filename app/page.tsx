@@ -122,27 +122,25 @@ function Focus() {
 function About() {
   return (
     <section id="about" className="border-b border-line" aria-labelledby="about-heading">
-      <div className="mx-auto grid max-w-6xl items-start gap-12 px-5 py-20 sm:px-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="flex items-start gap-5">
+      <div className="mx-auto grid max-w-6xl items-start gap-12 px-5 py-20 sm:px-8 lg:grid-cols-2">
+        <div>
+          <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-teal">
+            02 — About
+          </p>
+          <h2 id="about-heading" className="display mt-3 text-3xl sm:text-5xl">
+            Based in Guatemala.
+            <br />
+            Shipping remotely.
+          </h2>
           <Image
             src="/images/portrait.jpg"
             alt="David Ochoa, smiling outdoors with the Golden Gate Bridge behind him"
-            width={112}
-            height={112}
-            className="h-28 w-28 rounded-3xl object-cover"
+            width={160}
+            height={160}
+            className="mt-8 h-40 w-40 rounded-3xl object-cover"
           />
-          <div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-teal">
-              02 — About
-            </p>
-            <h2 id="about-heading" className="display mt-3 text-3xl sm:text-4xl">
-              Based in Guatemala.
-              <br />
-              Shipping remotely.
-            </h2>
-          </div>
         </div>
-        <div>
+        <div className="lg:pt-10">
           <p className="text-lg leading-8 text-muted">
             I&apos;m a senior software engineer working across the stack —
             Node.js, TypeScript, React, Next.js — on products that have to
