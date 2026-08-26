@@ -60,7 +60,7 @@ function LocationBadge() {
           </defs>
           <text className="fill-white text-[11px] tracking-[0.28em] uppercase">
             <textPath href="#circlePath">
-              Located in {site.location} — Located in {site.location} —
+              Located in {site.location} · Located in {site.location} ·
             </textPath>
           </text>
         </svg>

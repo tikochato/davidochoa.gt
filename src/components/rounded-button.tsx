@@ -59,7 +59,6 @@ export function RoundedButton({
           className={classes}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
-          data-cursor="hidden"
         >
           {inner}
         </a>
@@ -71,7 +70,6 @@ export function RoundedButton({
         className={classes}
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
-        data-cursor="hidden"
       >
         {inner}
       </Link>
@@ -85,7 +83,6 @@ export function RoundedButton({
       onClick={onClick}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
-      data-cursor="hidden"
     >
       {inner}
     </button>

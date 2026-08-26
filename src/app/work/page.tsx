@@ -28,7 +28,6 @@ export default function WorkPage() {
               key={project.slug}
               href={`/work/${project.slug}`}
               className={index % 3 === 0 ? "md:col-span-2" : ""}
-              data-cursor-label="View"
             >
               <div className="overflow-hidden rounded-[10px] bg-canvas">
                 <img

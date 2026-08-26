@@ -31,7 +31,6 @@ export function Gallery() {
               key={project.slug}
               href={`/work/${project.slug}`}
               className="group relative aspect-[4/5] min-w-0 flex-1 overflow-hidden rounded-[10px]"
-              data-cursor-label="View"
             >
               <img
                 src={project.image}

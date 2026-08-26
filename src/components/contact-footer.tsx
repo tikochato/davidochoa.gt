@@ -24,14 +24,12 @@ export function ContactFooter() {
           <a
             href={`mailto:${site.email}`}
             className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-5 text-[15px] tracking-[0.04em] transition hover:bg-white hover:text-canvas"
-            data-cursor="hidden"
           >
             {site.email}
           </a>
           <a
             href="/contact"
             className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-5 text-[15px] tracking-[0.04em] transition hover:bg-white hover:text-canvas"
-            data-cursor="hidden"
           >
             Book a call
           </a>
@@ -57,7 +55,6 @@ export function ContactFooter() {
                   href={social.href}
                   target="_blank"
                   rel="noreferrer"
-                  data-cursor="hidden"
                 >
                   {social.label}
                 </a>

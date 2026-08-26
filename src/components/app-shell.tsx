@@ -1,6 +1,5 @@
 "use client";
 
-import { CustomCursor } from "@/components/custom-cursor";
 import { Header } from "@/components/header";
 import { Menu } from "@/components/menu";
 import { Preloader } from "@/components/preloader";
@@ -14,7 +13,6 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <Preloader />
       <Header />
       <Menu />
-      <CustomCursor />
       {children}
     </SiteProvider>
   );

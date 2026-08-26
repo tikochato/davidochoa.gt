@@ -38,7 +38,6 @@ export function Projects() {
               style={{ opacity: active === null || active === index ? 1 : 0.28 }}
               onMouseEnter={() => setActive(index)}
               onMouseLeave={() => setActive(null)}
-              data-cursor-label="View"
             >
               <h3 className="font-display text-[42px] leading-none tracking-[0.02em] transition group-hover:-translate-x-3 lg:text-[56px]">
                 {project.title}

@@ -15,7 +15,6 @@ export function Header() {
           <Link
             href="/"
             className="pointer-events-auto text-[12px] leading-tight tracking-[0.06em] text-white"
-            data-cursor="hidden"
           >
             © Code by {site.firstName}
           </Link>
@@ -28,7 +27,6 @@ export function Header() {
                 <Link
                   href={item.href}
                   className="text-[12px] tracking-[0.08em] text-white"
-                  data-cursor="hidden"
                 >
                   {item.label}
                 </Link>
@@ -41,7 +39,6 @@ export function Header() {
               type="button"
               className="flex items-center gap-2 text-[12px] tracking-[0.08em] text-white md:hidden"
               onClick={() => setMenuOpen(!menuOpen)}
-              data-cursor="hidden"
               aria-expanded={menuOpen}
               aria-label="Open menu"
             >
@@ -55,7 +52,6 @@ export function Header() {
               type="button"
               className="flex h-12 w-12 items-center justify-center rounded-full bg-white/10 text-white"
               onClick={() => setMenuOpen(!menuOpen)}
-              data-cursor="hidden"
               aria-expanded={menuOpen}
               aria-label="Open menu"
             >

@@ -78,7 +78,6 @@ export default async function ProjectPage({ params }: Props) {
           <Link
             href={`/work/${next.slug}`}
             className="font-display text-[32px] tracking-[0.02em] sm:text-[48px]"
-            data-cursor-label="Next"
           >
             {next.title}
           </Link>

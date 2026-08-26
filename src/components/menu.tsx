@@ -67,7 +67,6 @@ export function Menu() {
                   type="button"
                   onClick={() => setMenuOpen(false)}
                   className="flex h-14 w-14 items-center justify-center rounded-full bg-iris text-2xl"
-                  data-cursor="hidden"
                   aria-label="Close menu"
                 >
                   ×
@@ -89,7 +88,6 @@ export function Menu() {
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
                     className="group flex items-center gap-4 text-[56px] leading-none tracking-[0.02em] sm:text-[72px]"
-                    data-cursor="hidden"
                   >
                     <span className="h-2.5 w-2.5 rounded-full bg-white opacity-0 transition group-hover:opacity-100" />
                     {item.label}
@@ -109,7 +107,6 @@ export function Menu() {
                     href={social.href}
                     target="_blank"
                     rel="noreferrer"
-                    data-cursor="hidden"
                   >
                     {social.label}
                   </a>
