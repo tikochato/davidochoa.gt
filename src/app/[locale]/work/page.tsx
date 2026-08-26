@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactFooter } from "@/components/contact-footer";
-import { projects } from "@/data/projects";
+import { projectHost, projects } from "@/data/projects";
 import { site } from "@/data/site";
-import { localizeHref, type Locale } from "@/i18n/config";
+import { interpolate, localizeHref, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/get-dictionary";
-import { interpolate } from "@/i18n/config";
 import { localeMetadata } from "@/i18n/metadata";
 
 export async function generateMetadata({
@@ -23,7 +22,6 @@ export async function generateMetadata({
 export default async function WorkPage({ params }: PageProps<"/[locale]/work">) {
   const { locale } = await params;
   const dictionary = getDictionary(locale);
-  const typedLocale = locale as Locale;
 
   return (
     <main>
@@ -39,35 +37,32 @@ export default async function WorkPage({ params }: PageProps<"/[locale]/work">) 
         </p>
 
         <div className="mt-20 grid gap-16 md:grid-cols-2">
-          {projects.map((project, index) => {
-            const copy = project.copy[typedLocale];
-            return (
-              <Link
-                key={project.slug}
-                href={localizeHref(typedLocale, `/work/${project.slug}`)}
-                className={index % 3 === 0 ? "md:col-span-2" : ""}
-              >
-                <div className="overflow-hidden rounded-[10px] bg-canvas">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className={`w-full object-cover ${index % 3 === 0 ? "aspect-[16/8]" : "aspect-[4/5]"}`}
-                  />
+          {projects.map((project, index) => (
+            <Link
+              key={project.slug}
+              href={localizeHref(locale as Locale, `/work/${project.slug}`)}
+              className={index % 3 === 0 ? "md:col-span-2" : ""}
+            >
+              <div className="overflow-hidden rounded-[10px] bg-canvas">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className={`w-full object-cover ${index % 3 === 0 ? "aspect-[16/8]" : "aspect-[4/5]"}`}
+                />
+              </div>
+              <div className="mt-5 flex items-baseline justify-between gap-4">
+                <div>
+                  <h2 className="font-display text-[28px] tracking-[0.02em] sm:text-[34px]">
+                    {project.title}
+                  </h2>
+                  <p className="mt-1 text-[14px] tracking-[0.04em] text-[#555]">
+                    {projectHost(project)}
+                  </p>
                 </div>
-                <div className="mt-5 flex items-baseline justify-between gap-4">
-                  <div>
-                    <h2 className="font-display text-[28px] tracking-[0.02em] sm:text-[34px]">
-                      {project.title}
-                    </h2>
-                    <p className="mt-1 text-[14px] tracking-[0.04em] text-[#555]">
-                      {copy.services}
-                    </p>
-                  </div>
-                  <span className="text-[14px] tracking-[0.06em]">{project.year}</span>
-                </div>
-              </Link>
-            );
-          })}
+                <span className="text-[14px] tracking-[0.06em]">{project.year}</span>
+              </div>
+            </Link>
+          ))}
         </div>
       </section>
       <ContactFooter />

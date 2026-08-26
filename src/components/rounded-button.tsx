@@ -62,6 +62,8 @@ export function RoundedButton({
         <a
           href={href}
           className={classes}
+          target="_blank"
+          rel="noopener noreferrer"
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
         >

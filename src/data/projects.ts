@@ -1,5 +1,3 @@
-import type { Locale } from "@/i18n/config";
-
 export type Project = {
   slug: string;
   title: string;
@@ -9,6 +7,10 @@ export type Project = {
   featured: boolean;
   link: string;
 };
+
+export function projectHost(project: Project) {
+  return new URL(project.link).hostname.replace(/^www\./, "");
+}
 
 export const projects: Project[] = [
   {

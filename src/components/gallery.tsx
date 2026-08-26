@@ -3,12 +3,9 @@
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
-import { useLocale } from "@/components/locale-provider";
 import { featuredProjects } from "@/data/projects";
-import { localizeHref } from "@/i18n/config";
 
 export function Gallery() {
-  const { locale } = useLocale();
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const springX = useSpring(x, { stiffness: 80, damping: 20, mass: 0.4 });
