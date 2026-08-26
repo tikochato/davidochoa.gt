@@ -1,14 +1,16 @@
 export const site = {
-  name: "Elian Mora",
-  firstName: "Elian",
-  lastName: "Mora",
-  role: "Designer & Developer",
-  location: "Mexico City",
-  locationShort: "CDMX",
-  timezone: "America/Mexico_City",
-  email: "hello@elianmora.dev",
-  url: "https://elianmora.dev",
-  tagline: "Designer & Developer — building digital products with type, motion, and restraint.",
+  name: "David Ochoa",
+  firstName: "David",
+  lastName: "Ochoa",
+  role: "Senior Software Engineer",
+  location: "Guatemala City",
+  locationShort: "GT",
+  timezone: "America/Guatemala",
+  email: "hello@davidochoa.gt",
+  url: "https://davidochoa.gt",
+  heroLine: "Senior Software Engineer. Located in Guatemala City.",
+  tagline:
+    "Senior Software Engineer — building digital products with type, motion, and restraint.",
   description:
     "Independent designer and developer. I help teams ship websites and products that feel inevitable: considered, fast, and a little cinematic.",
   about:
@@ -31,9 +33,8 @@ export const site = {
     { label: "Contact", href: "/contact" },
   ],
   socials: [
-    { label: "GitHub", href: "https://github.com" },
-    { label: "LinkedIn", href: "https://www.linkedin.com" },
-    { label: "Are.na", href: "https://www.are.na" },
+    { label: "GitHub", href: "https://github.com/tikochato" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/tikochato/" },
   ],
   services: [
     "Web design",

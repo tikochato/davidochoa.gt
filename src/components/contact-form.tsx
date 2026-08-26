@@ -80,7 +80,7 @@ export function ContactForm() {
           required
           name="message"
           rows={4}
-          placeholder="Hello Elian, can you help me with... *"
+          placeholder={`Hello ${site.firstName}, can you help me with... *`}
           className="field-input resize-none"
         />
       </Field>

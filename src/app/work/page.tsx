@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactFooter } from "@/components/contact-footer";
 import { projects } from "@/data/projects";
+import { site } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Work",
-  description: "Selected design and development work by Elian Mora.",
+  description: `Selected design and development work by ${site.name}.`,
 };
 
 export default function WorkPage() {

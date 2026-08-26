@@ -28,7 +28,7 @@ export function Landing() {
         <div className="mb-10 flex items-end justify-between gap-6">
           <LocationBadge />
           <p className="hidden max-w-[280px] text-right text-[13px] leading-relaxed tracking-[0.04em] text-white/80 sm:block">
-            Freelance {site.role.toLowerCase()}. Located in {site.location}.
+            {site.heroLine}
           </p>
         </div>
 

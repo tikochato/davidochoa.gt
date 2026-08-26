@@ -1,4 +1,4 @@
-# Elian Mora
+# David Ochoa
 
 A Next.js portfolio inspired by the editorial, motion-first language of [dennissnellenberg.com](https://dennissnellenberg.com/): multilingual preloader, oversized type, magnetic buttons, hover galleries, and a rounded contact footer.
 
