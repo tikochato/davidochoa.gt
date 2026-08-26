@@ -1,0 +1,45 @@
+export const site = {
+  name: "Elian Mora",
+  firstName: "Elian",
+  lastName: "Mora",
+  role: "Designer & Developer",
+  location: "Mexico City",
+  locationShort: "CDMX",
+  timezone: "America/Mexico_City",
+  email: "hello@elianmora.dev",
+  url: "https://elianmora.dev",
+  tagline: "Designer & Developer — building digital products with type, motion, and restraint.",
+  description:
+    "Independent designer and developer. I help teams ship websites and products that feel inevitable: considered, fast, and a little cinematic.",
+  about:
+    "I work with startups and studios on brand sites, product interfaces, and the motion that ties them together. Less decoration, more decisions. From first sketch to shipped build.",
+  greetings: [
+    "Hello",
+    "Hola",
+    "Bonjour",
+    "Ciao",
+    "Olá",
+    "こんにちは",
+    "Hallå",
+    "Guten Tag",
+    "你好",
+    "Hallo",
+  ],
+  nav: [
+    { label: "Work", href: "/work" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+  ],
+  socials: [
+    { label: "GitHub", href: "https://github.com" },
+    { label: "LinkedIn", href: "https://www.linkedin.com" },
+    { label: "Are.na", href: "https://www.are.na" },
+  ],
+  services: [
+    "Web design",
+    "Web development",
+    "Product UI",
+    "Motion & interaction",
+    "Design systems",
+  ],
+} as const;

@@ -1,0 +1,93 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+:root {
+  --background: #1c1d20;
+  --foreground: #ffffff;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-canvas: #1c1d20;
+  --color-paper: #c8c8c8;
+  --color-fog: #999d9e;
+  --color-iris: #455ce9;
+  --color-iris-deep: #334bd3;
+  --font-sans: var(--font-outfit);
+  --font-display: var(--font-syne);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--canvas, #1c1d20);
+  color: var(--foreground);
+  font-family: var(--font-outfit), sans-serif;
+  letter-spacing: 0.02em;
+}
+
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.field-input {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: #ffffff;
+  font-size: 18px;
+  letter-spacing: 0.03em;
+}
+
+.field-input::placeholder {
+  color: #5c5d60;
+}
+
+.field-input option {
+  color: #1c1d20;
+}
+
+.spin-slow {
+  animation: spin 18s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spin-slow {
+    animation: none;
+  }
+
+  html.has-custom-cursor,
+  html.has-custom-cursor * {
+    cursor: auto !important;
+  }
+}

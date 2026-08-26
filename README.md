@@ -1,71 +1,43 @@
-# davidochoa.gt
+# Elian Mora
 
-Personal landing page for David Ochoa — Senior Software Engineer.
+A Next.js portfolio inspired by the editorial, motion-first language of [dennissnellenberg.com](https://dennissnellenberg.com/): multilingual preloader, oversized type, magnetic buttons, hover galleries, and a rounded contact footer.
 
-A single-page, single-screen static site. No build step, no dependencies, no
-JavaScript framework: one `index.html` plus static assets, served directly by
-GitHub Pages.
+This is a fresh site — not a restyle of the previous landing page.
 
-## Structure
+## Stack
 
-```
-index.html            The entire page — header, links, footer
-CNAME                 Custom domain for GitHub Pages (davidochoa.gt)
-assets/
-  css/main.css        Compiled stylesheet (generated from assets/sass)
-  css/ie8.css         Legacy IE fallbacks
-  css/ie9.css
-  css/images/bg.jpg   Scrolling background (1500px wide, horizontally tileable)
-  fonts/              Font Awesome webfonts, used for the social icons
-  js/ie/              html5shiv, respond.js, CSS3 PIE — legacy IE shims only
-  sass/               Sass sources for the CSS above
-```
+- Next.js 16 (App Router)
+- React 19
+- Tailwind CSS 4
+- Framer Motion
+- Lenis smooth scroll
 
-## Local preview
+## Pages
 
-No tooling required — open `index.html` in a browser, or serve the folder:
+- `/` — Home: hero, statement, project gallery, list, sliding images, contact
+- `/work` — Selected work
+- `/work/[slug]` — Case study
+- `/about` — Studio and approach
+- `/contact` — Inquiry form (opens a mail client)
 
-```sh
-python3 -m http.server 8000
-```
+Content lives in `src/data/site.ts` and `src/data/projects.ts`.
 
-Then visit http://localhost:8000.
-
-## Editing content
-
-Everything user-facing lives in `index.html`:
-
-- **Headline and taglines** — the `<h1>` and two `<p>` elements in `#header`.
-- **Social links** — the `<nav>` list. Icons come from Font Awesome class names
-  (`fa-github`, `fa-linkedin-square`, …), so swapping an icon means swapping that
-  class. Delete unused entries rather than pointing them at `#`.
-- **Metadata** — `<title>`, `description`, and the Open Graph tags in `<head>`
-  drive search results and link previews. `og:url` and `og:image` are absolute
-  and hardcoded to `https://davidochoa.gt`, so they need updating if the domain
-  changes.
-
-## Editing styles
-
-`assets/css/main.css` is compiled output. Edit `assets/sass/main.scss` and
-recompile rather than patching the CSS directly:
+## Local development
 
 ```sh
-sass assets/sass/main.scss assets/css/main.css
+npm install
+npm run dev
 ```
 
-If you never plan to touch the styles, `assets/sass/` can be deleted safely.
+Open [http://localhost:3000](http://localhost:3000).
 
-### The scrolling background
+```sh
+npm run build
+npm run start
+```
 
-The animation is pure CSS. A replacement for `assets/css/images/bg.jpg` should be
-horizontally tileable, wide and short, roughly 1500px wide, and fade to a solid
-color at the top or bottom — that color fills the empty space above and below.
-Set the background color, URL, and placement via `$bg` in
-`assets/sass/libs/_vars.scss`, adjusting `$bg-width` if the image isn't 1500px.
+## Deploy
 
-## Deployment
+The app is a standard Next.js project. [Vercel](https://vercel.com) is the straightforward path. Point the existing `davidochoa.gt` domain at the deployment if you want to keep the custom domain (`CNAME` is still in the repo).
 
-Pushing to `master` publishes via GitHub Pages. The custom domain comes from the
-`CNAME` file, and only resolves once DNS at the registrar points at GitHub —
-either an `ALIAS`/`ANAME` on the apex to `tikochato.github.io`, or `A` records to
-`185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
+Photography is from [Unsplash](https://unsplash.com), used as placeholders for a fictional studio identity.
