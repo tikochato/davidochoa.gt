@@ -1,10 +1,10 @@
-# unrs-resolver is pulled in by eslint-import-resolver-typescript
-# (via eslint-config-next). It is not used by next dev or next build.
-#
-# Native code ships as optionalDependencies:
-#   @unrs/resolver-binding-<platform>
-# The postinstall (napi-postinstall) only downloads a binary if those
-# optional packages were skipped (--no-optional). pnpm installs them by
-# default, so the script is unnecessary and is explicitly denied.
+packages:
+  - "."
+
+# unrs-resolver is an ESLint import-resolver helper (eslint-config-next).
+# It is not used by next dev or next build.
+# Native binaries already come from optionalDependencies
+# (@unrs/resolver-binding-*). The postinstall is only a download fallback.
+# Use a real boolean. The placeholder "set this to true or false" still errors.
 allowBuilds:
   unrs-resolver: false

@@ -38,7 +38,7 @@ pnpm start
 
 Next.js is pinned to `16.3.2` so `pnpm install` passes a 24-hour `minimumReleaseAge` supply-chain check. `16.3.3` was published too recently for that policy.
 
-`unrs-resolver` (an ESLint import-resolver native helper) is listed in `pnpm-workspace.yaml` with `allowBuilds: false`. You do not need its postinstall: the platform binary already arrives as an optional dependency. Do not run `pnpm approve-builds` for it.
+`unrs-resolver` (an ESLint import-resolver helper) has a postinstall we do **not** need. The native binary already arrives as an optional dependency. `pnpm-workspace.yaml` sets `allowBuilds.unrs-resolver: false` so install will not run that script and will not fail. Do not run `pnpm approve-builds` for it.
 
 ## Deploy
 
