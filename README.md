@@ -25,16 +25,18 @@ Content lives in `src/data/site.ts` and `src/data/projects.ts`.
 ## Local development
 
 ```sh
-npm install
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
 
 ```sh
-npm run build
-npm run start
+pnpm build
+pnpm start
 ```
+
+Next.js is pinned to `16.3.2` so `pnpm install` passes a 24-hour `minimumReleaseAge` supply-chain check. `16.3.3` was published too recently for that policy.
 
 ## Deploy
 
