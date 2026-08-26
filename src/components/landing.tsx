@@ -58,9 +58,14 @@ function LocationBadge() {
               d="M 50, 50 m -37, 0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0"
             />
           </defs>
-          <text className="fill-white text-[11px] tracking-[0.28em] uppercase">
+          <text
+            className="fill-white text-[11px] uppercase"
+            xmlSpace="preserve"
+            textLength="232.5"
+            lengthAdjust="spacing"
+          >
             <textPath href="#circlePath">
-              Located in {site.location} · Located in {site.location} ·
+              {`Located in ${site.location}\u2003\u00B7\u2003`}
             </textPath>
           </text>
         </svg>
