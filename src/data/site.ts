@@ -2,20 +2,10 @@ export const site = {
   name: "David Ochoa",
   firstName: "David",
   lastName: "Ochoa",
-  role: "Senior Software Engineer",
-  location: "Guatemala City",
-  locationShort: "GT",
   timezone: "America/Guatemala",
+  locationShort: "GT",
   email: "hello@davidochoa.gt",
   url: "https://davidochoa.gt",
-  heroLine: "Senior Software Engineer. Located in Guatemala City.",
-  tagline:
-    "Senior Software Engineer — helping companies ship software they can keep.",
-  headline: "I help companies ship software they can keep.",
-  description:
-    "Independent senior software engineer. I help teams take products from intent to production — architecture, interfaces, and the systems underneath. Together we set a higher bar: considered, fast, and built to last.",
-  about:
-    "Based in Guatemala City. From first sketch to shipped build.",
   greetings: [
     "Hello",
     "Hola",
@@ -28,12 +18,6 @@ export const site = {
     "Guten Tag",
     "你好",
     "Hallo",
-  ],
-  nav: [
-    { label: "Home", href: "/#home" },
-    { label: "About", href: "/#about" },
-    { label: "Work", href: "/#work" },
-    { label: "Contact", href: "/#contact" },
   ],
   socials: [
     { label: "GitHub", href: "https://github.com/tikochato" },

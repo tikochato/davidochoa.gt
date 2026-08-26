@@ -2,9 +2,12 @@
 
 import { ContactForm } from "@/components/contact-form";
 import { LocalTime } from "@/components/local-time";
+import { useLocale } from "@/components/locale-provider";
 import { site } from "@/data/site";
 
 export function ContactFooter() {
+  const { dictionary } = useLocale();
+
   return (
     <footer
       id="contact"
@@ -14,16 +17,16 @@ export function ContactFooter() {
         <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:items-start">
           <div>
             <h2 className="max-w-[12ch] font-display text-[58px] leading-[0.95] tracking-[0.02em] sm:text-[92px]">
-              Let&apos;s work together
+              {dictionary.contact.heading}
             </h2>
             <div className="mt-12 space-y-6 text-[14px] tracking-[0.04em]">
               <div>
-                <p className="mb-2 text-fog uppercase">Email</p>
+                <p className="mb-2 text-fog uppercase">{dictionary.contact.email}</p>
                 <a href={`mailto:${site.email}`}>{site.email}</a>
               </div>
               <div>
-                <p className="mb-2 text-fog uppercase">Location</p>
-                <p>{site.location}</p>
+                <p className="mb-2 text-fog uppercase">{dictionary.contact.location}</p>
+                <p>{dictionary.landing.location}</p>
               </div>
             </div>
           </div>
@@ -33,16 +36,16 @@ export function ContactFooter() {
         <div className="mt-24 flex flex-col gap-8 border-t border-white/15 pt-6 text-[12px] tracking-[0.08em] uppercase sm:flex-row sm:items-end sm:justify-between">
           <div className="flex gap-12">
             <div>
-              <p className="mb-2 text-fog">Version</p>
-              <p>2026 © Edition</p>
+              <p className="mb-2 text-fog">{dictionary.contact.version}</p>
+              <p>{dictionary.contact.edition}</p>
             </div>
             <div>
-              <p className="mb-2 text-fog">Local time</p>
+              <p className="mb-2 text-fog">{dictionary.contact.localTime}</p>
               <LocalTime />
             </div>
           </div>
           <div>
-            <p className="mb-2 text-fog">Socials</p>
+            <p className="mb-2 text-fog">{dictionary.contact.socials}</p>
             <div className="flex gap-6">
               {site.socials.map((social) => (
                 <a

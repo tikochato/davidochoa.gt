@@ -3,9 +3,12 @@
 import { FormEvent, useState } from "react";
 import { Magnetic } from "@/components/magnetic";
 import { RoundedButton } from "@/components/rounded-button";
+import { useLocale } from "@/components/locale-provider";
 import { site } from "@/data/site";
+import { interpolate } from "@/i18n/config";
 
 export function ContactForm() {
+  const { dictionary } = useLocale();
   const [sent, setSent] = useState(false);
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -15,19 +18,25 @@ export function ContactForm() {
     const email = String(data.get("email") || "");
     const message = String(data.get("message") || "");
 
-    const body = [`Name: ${name}`, `Email: ${email}`, "", message].join("\n");
+    const body = [
+      `${dictionary.form.mailName}: ${name}`,
+      `${dictionary.form.mailEmail}: ${email}`,
+      "",
+      message,
+    ].join("\n");
 
-    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(`New inquiry from ${name}`)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:${site.email}?subject=${encodeURIComponent(
+      interpolate(dictionary.form.mailSubject, { name }),
+    )}&body=${encodeURIComponent(body)}`;
     setSent(true);
   }
 
   if (sent) {
     return (
       <div className="rounded-[10px] bg-white/5 p-10">
-        <h2 className="font-display text-[40px]">Message ready.</h2>
+        <h2 className="font-display text-[40px]">{dictionary.form.sentTitle}</h2>
         <p className="mt-4 max-w-[40ch] text-[16px] leading-relaxed text-white/70">
-          Your mail client should open with the note. If it does not, write
-          directly to {site.email}.
+          {interpolate(dictionary.form.sentBody, { email: site.email })}
         </p>
       </div>
     );
@@ -35,29 +44,31 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="space-y-0">
-      <Field index="01" label="What's your name?">
+      <Field index="01" label={dictionary.form.nameLabel}>
         <input
           required
           name="name"
-          placeholder="John Doe *"
+          placeholder={dictionary.form.namePlaceholder}
           className="field-input"
         />
       </Field>
-      <Field index="02" label="What's your email?">
+      <Field index="02" label={dictionary.form.emailLabel}>
         <input
           required
           type="email"
           name="email"
-          placeholder="john@doe.com *"
+          placeholder={dictionary.form.emailPlaceholder}
           className="field-input"
         />
       </Field>
-      <Field index="03" label="Your message">
+      <Field index="03" label={dictionary.form.messageLabel}>
         <textarea
           required
           name="message"
           rows={4}
-          placeholder={`Hello ${site.firstName}, can you help me with... *`}
+          placeholder={interpolate(dictionary.form.messagePlaceholder, {
+            name: site.firstName,
+          })}
           className="field-input resize-none"
         />
       </Field>
@@ -65,7 +76,7 @@ export function ContactForm() {
       <div className="flex justify-end pt-10">
         <Magnetic>
           <RoundedButton className="h-[180px] w-[180px] px-0 py-0">
-            Send it
+            {dictionary.form.send}
           </RoundedButton>
         </Magnetic>
       </div>

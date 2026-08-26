@@ -1,0 +1,178 @@
+export const es = {
+  meta: {
+    role: "Ingeniero de software senior",
+    description:
+      "Ingeniero de software senior independiente. Acompaño a equipos a llevar productos de la intención a producción: arquitectura, interfaces y los sistemas que hay detrás. Juntos subimos el listón: considerado, rápido y hecho para durar.",
+    workDescription: "Trabajo seleccionado de diseño y desarrollo de {name}.",
+    contactDescription: "Empieza un proyecto con {name}.",
+  },
+  header: {
+    codeBy: "© Código de {name}",
+    menu: "Menú",
+    openMenu: "Abrir menú",
+    closeMenu: "Cerrar menú",
+    navigation: "Navegación",
+  },
+  nav: [
+    { id: "home", label: "Inicio" },
+    { id: "about", label: "Sobre mí" },
+    { id: "work", label: "Trabajo" },
+    { id: "contact", label: "Contacto" },
+  ],
+  landing: {
+    heroLine: "Ingeniero de software senior. En Ciudad de Guatemala.",
+    locatedIn: "Ubicado en {location}",
+    location: "Ciudad de Guatemala",
+  },
+  about: {
+    headline: "Ayudo a las empresas a publicar software que pueden mantener.",
+    description:
+      "Ingeniero de software senior independiente. Acompaño a equipos a llevar productos de la intención a producción: arquitectura, interfaces y los sistemas que hay detrás. Juntos subimos el listón: considerado, rápido y hecho para durar.",
+    about: "En Ciudad de Guatemala. Del primer boceto al build en producción.",
+  },
+  contact: {
+    heading: "Trabajemos juntos",
+    pageHeading: "Empecemos un proyecto juntos",
+    email: "Correo",
+    location: "Ubicación",
+    version: "Versión",
+    edition: "2026 © Edición",
+    localTime: "Hora local",
+    socials: "Redes",
+  },
+  form: {
+    nameLabel: "¿Cómo te llamas?",
+    namePlaceholder: "Juan Pérez *",
+    emailLabel: "¿Cuál es tu correo?",
+    emailPlaceholder: "juan@correo.com *",
+    messageLabel: "Tu mensaje",
+    messagePlaceholder: "Hola {name}, ¿me puedes ayudar con… *",
+    send: "Enviar",
+    sentTitle: "Mensaje listo.",
+    sentBody:
+      "Debería abrirse tu cliente de correo con la nota. Si no, escribe directo a {email}.",
+    mailName: "Nombre",
+    mailEmail: "Correo",
+    mailSubject: "Nueva consulta de {name}",
+  },
+  work: {
+    label: "Trabajo",
+    heading: "Proyectos seleccionados",
+    intro:
+      "Una mezcla de producto, editorial y hospitalidad — diseñado y construido de punta a punta.",
+    role: "Rol",
+    location: "Ubicación",
+    year: "Año",
+    next: "Siguiente proyecto",
+    all: "Todo el trabajo",
+  },
+  notFound: {
+    error: "Error",
+    title: "Perdido.",
+    body: "Esta página no existe. El trabajo sigue por acá.",
+    back: "Volver al inicio",
+  },
+  locale: {
+    es: "ES",
+    en: "EN",
+    name: {
+      es: "Español",
+      en: "English",
+    },
+    label: "Idioma",
+    switchTo: "Cambiar a {locale}",
+  },
+};
+
+export const en = {
+  meta: {
+    role: "Senior Software Engineer",
+    description:
+      "Independent senior software engineer. I help teams take products from intent to production — architecture, interfaces, and the systems underneath. Together we set a higher bar: considered, fast, and built to last.",
+    workDescription: "Selected design and development work by {name}.",
+    contactDescription: "Start a project with {name}.",
+  },
+  header: {
+    codeBy: "© Code by {name}",
+    menu: "Menu",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
+    navigation: "Navigation",
+  },
+  nav: [
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "work", label: "Work" },
+    { id: "contact", label: "Contact" },
+  ],
+  landing: {
+    heroLine: "Senior Software Engineer. Located in Guatemala City.",
+    locatedIn: "Located in {location}",
+    location: "Guatemala City",
+  },
+  about: {
+    headline: "I help companies ship software they can keep.",
+    description:
+      "Independent senior software engineer. I help teams take products from intent to production — architecture, interfaces, and the systems underneath. Together we set a higher bar: considered, fast, and built to last.",
+    about: "Based in Guatemala City. From first sketch to shipped build.",
+  },
+  contact: {
+    heading: "Let's work together",
+    pageHeading: "Let's start a project together",
+    email: "Email",
+    location: "Location",
+    version: "Version",
+    edition: "2026 © Edition",
+    localTime: "Local time",
+    socials: "Socials",
+  },
+  form: {
+    nameLabel: "What's your name?",
+    namePlaceholder: "John Doe *",
+    emailLabel: "What's your email?",
+    emailPlaceholder: "john@doe.com *",
+    messageLabel: "Your message",
+    messagePlaceholder: "Hello {name}, can you help me with... *",
+    send: "Send it",
+    sentTitle: "Message ready.",
+    sentBody:
+      "Your mail client should open with the note. If it does not, write directly to {email}.",
+    mailName: "Name",
+    mailEmail: "Email",
+    mailSubject: "New inquiry from {name}",
+  },
+  work: {
+    label: "Work",
+    heading: "Selected projects",
+    intro:
+      "A mix of product, editorial, and hospitality work — designed and built end to end.",
+    role: "Role",
+    location: "Location",
+    year: "Year",
+    next: "Next project",
+    all: "All work",
+  },
+  notFound: {
+    error: "Error",
+    title: "Lost.",
+    body: "This page does not exist. The work is still this way.",
+    back: "Back home",
+  },
+  locale: {
+    es: "ES",
+    en: "EN",
+    name: {
+      es: "Español",
+      en: "English",
+    },
+    label: "Language",
+    switchTo: "Switch to {locale}",
+  },
+};
+
+export type Dictionary = typeof es;
+
+export const dictionaries: Record<"es" | "en", Dictionary> = {
+  es,
+  en,
+};

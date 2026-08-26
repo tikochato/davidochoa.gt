@@ -2,9 +2,12 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useLocale } from "@/components/locale-provider";
 import { site } from "@/data/site";
+import { interpolate } from "@/i18n/config";
 
 export function Landing() {
+  const { dictionary } = useLocale();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -32,7 +35,7 @@ export function Landing() {
         <div className="mb-10 flex items-end justify-between gap-6">
           <LocationBadge />
           <p className="hidden max-w-[280px] text-right text-[13px] leading-relaxed tracking-[0.04em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:block">
-            {site.heroLine}
+            {dictionary.landing.heroLine}
           </p>
         </div>
 
@@ -51,6 +54,11 @@ export function Landing() {
 }
 
 function LocationBadge() {
+  const { dictionary } = useLocale();
+  const located = interpolate(dictionary.landing.locatedIn, {
+    location: dictionary.landing.location,
+  });
+
   return (
     <div className="flex items-center gap-5">
       <div className="relative h-[90px] w-[90px] text-white">
@@ -70,7 +78,7 @@ function LocationBadge() {
             lengthAdjust="spacing"
           >
             <textPath href="#circlePath">
-              {`Located in ${site.location}\u2003\u00B7\u2003`}
+              {`${located}\u2003\u00B7\u2003`}
             </textPath>
           </text>
         </svg>
@@ -79,7 +87,7 @@ function LocationBadge() {
         </span>
       </div>
       <p className="max-w-[9rem] text-[12px] leading-snug tracking-[0.04em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:hidden">
-        Located in {site.location}
+        {located}
       </p>
     </div>
   );

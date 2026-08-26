@@ -3,10 +3,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { LanguageSwitch } from "@/components/language-switch";
 import { Magnetic } from "@/components/magnetic";
+import { useLocale } from "@/components/locale-provider";
 import { useSite } from "@/components/site-context";
-import { cn } from "@/lib/cn";
 import { site } from "@/data/site";
+import { interpolate, localizeHref } from "@/i18n/config";
+import { cn } from "@/lib/cn";
 
 const ease = [0.76, 0, 0.24, 1] as const;
 const SCROLL_IN = 80;
@@ -15,6 +18,7 @@ const HERO_CLEARANCE = 24;
 
 export function Header() {
   const { setMenuOpen, menuOpen } = useSite();
+  const { locale, dictionary } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [overHero, setOverHero] = useState(false);
 
@@ -48,11 +52,11 @@ export function Header() {
       <div className="flex items-start justify-between px-5 pt-6 sm:px-10 sm:pt-8">
         <Magnetic>
           <Link
-            href="/#home"
+            href={localizeHref(locale, "/", "#home")}
             scroll={false}
             className="pointer-events-auto text-[12px] leading-tight tracking-[0.06em] text-white"
           >
-            © Code by {site.firstName}
+            {interpolate(dictionary.header.codeBy, { name: site.firstName })}
           </Link>
         </Magnetic>
 
@@ -67,10 +71,10 @@ export function Header() {
           aria-hidden={scrolled}
           inert={scrolled}
         >
-          {site.nav.map((item) => (
-            <Magnetic key={item.href}>
+          {dictionary.nav.map((item) => (
+            <Magnetic key={item.id}>
               <Link
-                href={item.href}
+                href={localizeHref(locale, "/", `#${item.id}`)}
                 scroll={false}
                 className="text-[12px] tracking-[0.08em] text-white"
                 tabIndex={scrolled ? -1 : undefined}
@@ -79,11 +83,12 @@ export function Header() {
               </Link>
             </Magnetic>
           ))}
+          <LanguageSwitch className="pointer-events-auto" />
         </motion.nav>
 
         <motion.div
           className={cn(
-            "md:hidden",
+            "flex items-center gap-5 md:hidden",
             scrolled ? "pointer-events-none" : "pointer-events-auto",
           )}
           initial={false}
@@ -92,17 +97,18 @@ export function Header() {
           aria-hidden={scrolled}
           inert={scrolled}
         >
+          <LanguageSwitch />
           <Magnetic>
             <button
               type="button"
               className="flex items-center gap-2 text-[12px] tracking-[0.08em] text-white"
               onClick={() => setMenuOpen(!menuOpen)}
               aria-expanded={menuOpen}
-              aria-label="Open menu"
+              aria-label={dictionary.header.openMenu}
               tabIndex={scrolled ? -1 : 0}
             >
               <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              Menu
+              {dictionary.header.menu}
             </button>
           </Magnetic>
         </motion.div>
@@ -124,7 +130,7 @@ export function Header() {
             className="flex h-12 w-12 items-center justify-center rounded-full bg-white/15 text-white"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-expanded={menuOpen}
-            aria-label="Open menu"
+            aria-label={dictionary.header.openMenu}
             tabIndex={scrolled ? 0 : -1}
           >
             <span className="flex flex-col gap-1.5">
