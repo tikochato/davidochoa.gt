@@ -25,5 +25,8 @@
     "eslint-config-next": "16.3.2",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": ["unrs-resolver"]
   }
 }

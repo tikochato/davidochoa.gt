@@ -38,6 +38,8 @@ pnpm start
 
 Next.js is pinned to `16.3.2` so `pnpm install` passes a 24-hour `minimumReleaseAge` supply-chain check. `16.3.3` was published too recently for that policy.
 
+`unrs-resolver` (an ESLint import-resolver native helper) is listed in `pnpm-workspace.yaml` with `allowBuilds: false`. You do not need its postinstall: the platform binary already arrives as an optional dependency. Do not run `pnpm approve-builds` for it.
+
 ## Deploy
 
 The app is a standard Next.js project. [Vercel](https://vercel.com) is the straightforward path. Point the existing `davidochoa.gt` domain at the deployment if you want to keep the custom domain (`CNAME` is still in the repo).
