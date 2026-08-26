@@ -10,14 +10,16 @@ export const site = {
   url: "https://davidochoa.gt",
   heroLine: "Senior Software Engineer. Located in Guatemala City.",
   tagline:
-    "Senior Software Engineer — building digital products with type, motion, and restraint.",
+    "Senior Software Engineer — helping companies ship software they can keep.",
+  headline: "I help companies ship software they can keep.",
   description:
-    "Independent designer and developer. I help teams ship websites and products that feel inevitable: considered, fast, and a little cinematic.",
+    "Independent senior software engineer. I help teams take products from intent to production — architecture, interfaces, and the systems underneath. Together we set a higher bar: considered, fast, and built to last.",
   about:
-    "I work with startups and studios on brand sites, product interfaces, and the motion that ties them together. Less decoration, more decisions. From first sketch to shipped build.",
+    "Based in Guatemala City. From first sketch to shipped build.",
   greetings: [
     "Hello",
     "Hola",
+    "¿La ütz awäch?",
     "Bonjour",
     "Ciao",
     "Olá",
@@ -29,18 +31,11 @@ export const site = {
   ],
   nav: [
     { label: "Work", href: "/work" },
-    { label: "About", href: "/about" },
+    { label: "About", href: "/#about" },
     { label: "Contact", href: "/contact" },
   ],
   socials: [
     { label: "GitHub", href: "https://github.com/tikochato" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/tikochato/" },
-  ],
-  services: [
-    "Web design",
-    "Web development",
-    "Product UI",
-    "Motion & interaction",
-    "Design systems",
   ],
 } as const;
