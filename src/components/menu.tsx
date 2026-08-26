@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Magnetic } from "@/components/magnetic";
 import { useSite } from "@/components/site-context";
+import { scrollToHash } from "@/components/smooth-scroll";
 import { site } from "@/data/site";
 
 const overlay = {
@@ -36,6 +38,7 @@ const linkVariants = {
 
 export function Menu() {
   const { menuOpen, setMenuOpen } = useSite();
+  const pathname = usePathname();
 
   return (
     <AnimatePresence>
@@ -75,7 +78,7 @@ export function Menu() {
             </div>
 
             <nav className="flex flex-col gap-2">
-              {[{ label: "Home", href: "/" }, ...site.nav].map((item, index) => (
+              {site.nav.map((item, index) => (
                 <motion.div
                   key={item.href}
                   custom={index}
@@ -86,7 +89,20 @@ export function Menu() {
                 >
                   <Link
                     href={item.href}
-                    onClick={() => setMenuOpen(false)}
+                    scroll={false}
+                    onClick={(event) => {
+                      const hash = item.href.includes("#")
+                        ? `#${item.href.split("#")[1]}`
+                        : "";
+                      if (hash && pathname === "/") {
+                        event.preventDefault();
+                        if (window.location.hash !== hash) {
+                          window.history.pushState(null, "", item.href);
+                        }
+                        scrollToHash(hash);
+                      }
+                      setMenuOpen(false);
+                    }}
                     className="group flex items-center gap-4 text-[56px] leading-none tracking-[0.02em] sm:text-[72px]"
                   >
                     <span className="h-2.5 w-2.5 rounded-full bg-white opacity-0 transition group-hover:opacity-100" />

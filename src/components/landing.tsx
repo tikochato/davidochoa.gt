@@ -14,7 +14,11 @@ export function Landing() {
   const nameX = useTransform(scrollYProgress, [0, 1], [0, -80]);
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[720px] overflow-hidden bg-canvas">
+    <section
+      id="home"
+      ref={ref}
+      className="relative h-screen min-h-[720px] overflow-hidden bg-canvas"
+    >
       <motion.div style={{ y }} className="absolute inset-0">
         <img
           src="/images/hero.jpg"

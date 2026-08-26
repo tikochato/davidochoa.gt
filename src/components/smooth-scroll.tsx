@@ -5,20 +5,29 @@ import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import { useSite } from "@/components/site-context";
 
+let lenisInstance: Lenis | null = null;
+
+export function scrollToHash(hash: string) {
+  if (!hash) return;
+  lenisInstance?.start();
+  lenisInstance?.scrollTo(hash);
+}
+
 export function SmoothScroll() {
   const { menuOpen, loading } = useSite();
   const pathname = usePathname();
 
   useEffect(() => {
-    if (loading || menuOpen) return;
+    if (loading) return;
 
     const lenis = new Lenis({
       duration: 1.15,
       smoothWheel: true,
       anchors: true,
     });
+    lenisInstance = lenis;
 
-    const scrollToHash = () => {
+    const onHashChange = () => {
       const hash = window.location.hash;
       if (hash) {
         lenis.scrollTo(hash);
@@ -26,9 +35,9 @@ export function SmoothScroll() {
     };
 
     const frameToHash = requestAnimationFrame(() => {
-      requestAnimationFrame(scrollToHash);
+      requestAnimationFrame(onHashChange);
     });
-    window.addEventListener("hashchange", scrollToHash);
+    window.addEventListener("hashchange", onHashChange);
 
     let frame = 0;
     function raf(time: number) {
@@ -40,10 +49,22 @@ export function SmoothScroll() {
     return () => {
       cancelAnimationFrame(frameToHash);
       cancelAnimationFrame(frame);
-      window.removeEventListener("hashchange", scrollToHash);
+      window.removeEventListener("hashchange", onHashChange);
       lenis.destroy();
+      if (lenisInstance === lenis) {
+        lenisInstance = null;
+      }
     };
-  }, [loading, menuOpen, pathname]);
+  }, [loading, pathname]);
+
+  useEffect(() => {
+    if (!lenisInstance) return;
+    if (menuOpen || loading) {
+      lenisInstance.stop();
+    } else {
+      lenisInstance.start();
+    }
+  }, [menuOpen, loading]);
 
   useEffect(() => {
     document.documentElement.style.overflow = menuOpen || loading ? "hidden" : "";

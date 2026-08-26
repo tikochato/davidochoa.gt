@@ -19,7 +19,7 @@ export function Gallery() {
   }
 
   return (
-    <section className="overflow-hidden bg-paper pb-8">
+    <section id="work" className="scroll-mt-24 overflow-hidden bg-paper pb-8">
       <div
         ref={ref}
         onMouseMove={onMove}

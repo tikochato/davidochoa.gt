@@ -1,38 +1,33 @@
 "use client";
 
-import { Magnetic } from "@/components/magnetic";
-import { RoundedButton } from "@/components/rounded-button";
+import { ContactForm } from "@/components/contact-form";
 import { LocalTime } from "@/components/local-time";
 import { site } from "@/data/site";
 
 export function ContactFooter() {
   return (
-    <footer className="relative z-10 -mt-px bg-canvas px-5 pt-28 pb-8 text-white sm:px-16 sm:pt-36">
+    <footer
+      id="contact"
+      className="relative z-10 -mt-px scroll-mt-24 bg-canvas px-5 pt-28 pb-8 text-white sm:px-16 sm:pt-36"
+    >
       <div className="mx-auto max-w-[1400px]">
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-          <h2 className="max-w-[12ch] font-display text-[58px] leading-[0.95] tracking-[0.02em] sm:text-[92px]">
-            Let&apos;s work together
-          </h2>
-          <Magnetic>
-            <RoundedButton href="/contact" className="h-[180px] w-[180px] px-0 py-0">
-              Get in touch
-            </RoundedButton>
-          </Magnetic>
-        </div>
-
-        <div className="mt-16 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-          <a
-            href={`mailto:${site.email}`}
-            className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-5 text-[15px] tracking-[0.04em] transition hover:bg-white hover:text-canvas"
-          >
-            {site.email}
-          </a>
-          <a
-            href="/contact"
-            className="inline-flex items-center justify-center rounded-full border border-white/20 px-8 py-5 text-[15px] tracking-[0.04em] transition hover:bg-white hover:text-canvas"
-          >
-            Book a call
-          </a>
+        <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+          <div>
+            <h2 className="max-w-[12ch] font-display text-[58px] leading-[0.95] tracking-[0.02em] sm:text-[92px]">
+              Let&apos;s work together
+            </h2>
+            <div className="mt-12 space-y-6 text-[14px] tracking-[0.04em]">
+              <div>
+                <p className="mb-2 text-fog uppercase">Email</p>
+                <a href={`mailto:${site.email}`}>{site.email}</a>
+              </div>
+              <div>
+                <p className="mb-2 text-fog uppercase">Location</p>
+                <p>{site.location}</p>
+              </div>
+            </div>
+          </div>
+          <ContactForm />
         </div>
 
         <div className="mt-24 flex flex-col gap-8 border-t border-white/15 pt-6 text-[12px] tracking-[0.08em] uppercase sm:flex-row sm:items-end sm:justify-between">

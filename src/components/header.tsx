@@ -31,7 +31,8 @@ export function Header() {
       <div className="flex items-start justify-between px-5 pt-6 sm:px-10 sm:pt-8">
         <Magnetic>
           <Link
-            href="/"
+            href="/#home"
+            scroll={false}
             className="pointer-events-auto text-[12px] leading-tight tracking-[0.06em] text-white"
           >
             © Code by {site.firstName}
@@ -53,6 +54,7 @@ export function Header() {
             <Magnetic key={item.href}>
               <Link
                 href={item.href}
+                scroll={false}
                 className="text-[12px] tracking-[0.08em] text-white"
                 tabIndex={scrolled ? -1 : undefined}
               >

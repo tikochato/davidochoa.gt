@@ -85,7 +85,7 @@ export default async function ProjectPage({ params }: Props) {
 
         <div className="mt-16 flex justify-center">
           <Magnetic>
-            <RoundedButton href="/work" dark>
+            <RoundedButton href="/#work" dark>
               All work
             </RoundedButton>
           </Magnetic>

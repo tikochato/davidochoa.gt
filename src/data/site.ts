@@ -30,9 +30,10 @@ export const site = {
     "Hallo",
   ],
   nav: [
-    { label: "Work", href: "/work" },
+    { label: "Home", href: "/#home" },
     { label: "About", href: "/#about" },
-    { label: "Contact", href: "/contact" },
+    { label: "Work", href: "/#work" },
+    { label: "Contact", href: "/#contact" },
   ],
   socials: [
     { label: "GitHub", href: "https://github.com/tikochato" },
