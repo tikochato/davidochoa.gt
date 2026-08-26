@@ -2,12 +2,13 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
 
 const slides = [
-  "/images/slide-1.jpg",
-  "/images/orbe.jpg",
-  "/images/slide-2.jpg",
-  "/images/lumen.jpg",
+  {"src": "/images/slide-1.jpg", "link": "https://fundamentoenergetico.com.gt/"},
+  {"src": "/images/slide-2.jpg", "link": "http://capacitacionesguatemala.com.gt/"},
+  {"src": "/images/slide-3.jpg", "link": "https://siim.com.gt/"},
+  {"src": "/images/slide-4.jpg", "link": "https://tutorias.com.gt/"},
 ];
 
 export function SlidingImages() {
@@ -24,12 +25,14 @@ export function SlidingImages() {
     <section ref={ref} className="relative z-20 bg-paper pt-8">
       <div className="overflow-hidden">
         <motion.div style={{ x }} className="flex gap-8 pl-[8vw]">
-          {slides.map((src) => (
+          {slides.map((slide) => (
             <div
-              key={src}
+              key={slide.src}
               className="relative h-[280px] w-[280px] shrink-0 overflow-hidden rounded-[10px] sm:h-[360px] sm:w-[420px]"
             >
-              <img src={src} alt="" className="h-full w-full object-cover" />
+              <Link href={slide.link} target="_blank" rel="noopener noreferrer">
+                <img src={slide.src} alt="" className="h-full w-full object-cover" />
+              </Link>
             </div>
           ))}
         </motion.div>

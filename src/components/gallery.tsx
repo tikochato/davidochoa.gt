@@ -28,11 +28,13 @@ export function Gallery() {
         onMouseMove={onMove}
         className="relative mx-[-10vw] min-h-[58vh]"
       >
-        <motion.div style={{ x: springX }} className="flex w-[140%] gap-6 px-[8vw]">
+        <motion.div style={{ x: springX }} className="flex w-[110%] gap-6 px-[8vw]">
           {featuredProjects.map((project) => (
             <Link
               key={project.slug}
-              href={localizeHref(locale, `/work/${project.slug}`)}
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative aspect-[4/5] min-w-0 flex-1 overflow-hidden rounded-[10px]"
             >
               <img
