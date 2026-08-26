@@ -59,7 +59,7 @@ export function Header() {
       {open ? (
         <nav
           id="mobile-nav"
-          className="border-t border-line px-5 py-4 md:hidden"
+          className="border-t border-line bg-ink px-5 py-4 md:hidden"
           aria-label="Mobile"
         >
           <ul className="flex flex-col gap-3 text-base">
