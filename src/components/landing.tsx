@@ -6,8 +6,8 @@ import {
   useReducedMotion,
   useScroll,
   useTransform,
-  type MotionValue,
 } from "framer-motion";
+import { HeroParallax } from "@/components/hero-parallax";
 import { useLocale } from "@/components/locale-provider";
 import { site } from "@/data/site";
 import { interpolate } from "@/i18n/config";
@@ -18,46 +18,53 @@ export function Landing() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end end"],
   });
-
-  const volcanoY = useTransform(scrollYProgress, [0, 0.55, 1], reduceMotion ? [0, 0, 0] : [0, -24, -32]);
-  const volcanoScale = useTransform(scrollYProgress, [0, 0.55, 1], reduceMotion ? [1, 1, 1] : [1, 1.1, 1.14]);
-  const archY = useTransform(scrollYProgress, [0, 0.55, 1], reduceMotion ? [0, 0, 0] : [0, 14, 22]);
-  const archScale = useTransform(scrollYProgress, [0, 0.55, 1], reduceMotion ? [1, 1, 1] : [1, 1.2, 1.26]);
-  const streetY = useTransform(scrollYProgress, [0, 0.55, 1], reduceMotion ? [0, 0, 0] : [0, 70, 110]);
-  const streetScale = useTransform(scrollYProgress, [0, 0.55, 1], reduceMotion ? [1, 1, 1] : [1, 1.38, 1.48]);
-  const nameX = useTransform(scrollYProgress, [0, 1], reduceMotion ? [0, 0] : [0, -80]);
+  const depthProgress = useTransform(scrollYProgress, (value) => {
+    const progress = Math.min(Math.max(value, 0), 1);
+    return 1 - (1 - progress) ** 3.4;
+  });
+  const contentProgress = useTransform(scrollYProgress, (value) => {
+    const progress = Math.min(Math.max(value, 0), 1);
+    return progress ** 1.35;
+  });
+  const backgroundY = useTransform(contentProgress, [0, 1], [0, 48]);
+  const contentY = useTransform(contentProgress, [0, 1], [0, -160]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.78, 1], [1, 1, 0]);
+  const nameX = useTransform(contentProgress, [0, 1], [0, -120]);
+  const nameScale = useTransform(depthProgress, [0, 1], [1, 1.14]);
+  const vignetteOpacity = useTransform(depthProgress, [0, 0.35, 1], [0, 0.15, 0.55]);
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section
       id="home"
       ref={ref}
-      className="relative h-[180svh] min-h-[720px] motion-reduce:h-svh"
+      className="relative isolate h-[240svh] min-h-[1728px] bg-canvas motion-reduce:h-svh motion-reduce:min-h-[720px]"
     >
-      <div className="sticky top-0 h-svh min-h-[720px] overflow-hidden bg-[linear-gradient(180deg,#6d8eab_0%,#9eb6c9_38%,#1c1d20_100%)]">
-        <ParallaxLayer
-          src="/images/hero-volcano.webp"
-          y={volcanoY}
-          scale={volcanoScale}
-          zIndex={1}
-          insetClassName="inset-[-10%]"
+      <div className="sticky top-0 h-svh min-h-[720px] overflow-hidden bg-canvas">
+        <motion.div
+          style={{ y: shouldReduceMotion ? 0 : backgroundY }}
+          className="absolute -inset-x-[6%] -inset-y-[24%]"
+        >
+          <HeroParallax
+            progress={depthProgress}
+            reducedMotion={Boolean(shouldReduceMotion)}
+          />
+        </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/25 to-canvas/20" />
+        <motion.div
+          style={{ opacity: shouldReduceMotion ? 0 : vignetteOpacity }}
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,transparent_18%,rgba(12,13,15,0.92)_100%)] motion-reduce:hidden"
         />
-        <ParallaxLayer
-          src="/images/hero-arch.webp"
-          y={archY}
-          scale={archScale}
-          zIndex={2}
-        />
-        <ParallaxLayer
-          src="/images/hero-street.webp"
-          y={streetY}
-          scale={streetScale}
-          zIndex={3}
-        />
-        <div className="pointer-events-none absolute inset-0 z-[4] bg-gradient-to-t from-canvas via-canvas/25 to-canvas/20" />
 
-        <div className="relative z-10 flex h-full flex-col justify-end px-5 pb-10 sm:px-12 sm:pb-14">
+        <motion.div
+          style={{
+            y: shouldReduceMotion ? 0 : contentY,
+            opacity: shouldReduceMotion ? 1 : contentOpacity,
+          }}
+          className="relative z-10 flex h-full flex-col justify-end px-5 pb-10 sm:px-12 sm:pb-14"
+        >
           <div className="mb-10 flex items-end justify-between gap-6">
             <LocationBadge />
             <p className="hidden max-w-[280px] text-right text-[13px] leading-relaxed tracking-[0.04em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:block">
@@ -66,15 +73,18 @@ export function Landing() {
           </div>
 
           <motion.h1
-            style={{ x: nameX }}
+            style={{
+              x: shouldReduceMotion ? 0 : nameX,
+              scale: shouldReduceMotion ? 1 : nameScale,
+            }}
             drag="x"
             dragConstraints={{ left: -180, right: 180 }}
             dragElastic={0.05}
-            className="cursor-grab font-display text-[18vw] leading-[0.8] tracking-[0.02em] text-white uppercase active:cursor-grabbing sm:text-[13vw]"
+            className="origin-bottom-left cursor-grab font-display text-[18vw] leading-[0.8] tracking-[0.02em] text-white uppercase active:cursor-grabbing sm:text-[13vw]"
           >
             {site.name}
           </motion.h1>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
