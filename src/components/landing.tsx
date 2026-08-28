@@ -90,35 +90,6 @@ export function Landing() {
   );
 }
 
-function ParallaxLayer({
-  src,
-  y,
-  scale,
-  zIndex,
-  insetClassName = "inset-[-6%]",
-}: {
-  src: string;
-  y: MotionValue<number>;
-  scale: MotionValue<number>;
-  zIndex: number;
-  insetClassName?: string;
-}) {
-  return (
-    <motion.div
-      className={`absolute origin-[50%_42%] ${insetClassName}`}
-      style={{ y, scale, zIndex }}
-    >
-      <img
-        src={src}
-        alt=""
-        className="h-full w-full object-cover object-center"
-        draggable={false}
-        fetchPriority="high"
-      />
-    </motion.div>
-  );
-}
-
 function LocationBadge() {
   const { dictionary } = useLocale();
   const located = interpolate(dictionary.landing.locatedIn, {
