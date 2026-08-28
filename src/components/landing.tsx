@@ -1,7 +1,14 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
+import { HeroParallax } from "@/components/hero-parallax";
 import { useLocale } from "@/components/locale-provider";
 import { site } from "@/data/site";
 import { interpolate } from "@/i18n/config";
@@ -11,43 +18,53 @@ export function Landing() {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start start", "end start"],
+    offset: ["start start", "end end"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], [0, 180]);
-  const nameX = useTransform(scrollYProgress, [0, 1], [0, -80]);
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+  const backgroundY = useTransform(smoothProgress, [0, 1], [0, 24]);
+  const nameX = useTransform(smoothProgress, [0, 1], [0, -80]);
+  const shouldReduceMotion = useReducedMotion();
 
   return (
     <section
       id="home"
       ref={ref}
-      className="relative h-screen min-h-[720px] overflow-hidden bg-canvas"
+      className="relative isolate h-[180svh] min-h-[1296px] bg-canvas motion-reduce:h-svh motion-reduce:min-h-[720px]"
     >
-      <motion.div style={{ y }} className="absolute inset-0">
-        <img
-          src="/images/hero.jpg"
-          alt=""
-          className="h-[120%] w-full object-cover opacity-80"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/25 to-canvas/20" />
-      </motion.div>
-
-      <div className="relative z-10 flex h-full flex-col justify-end px-5 pb-10 sm:px-12 sm:pb-14">
-        <div className="mb-10 flex items-end justify-between gap-6">
-          <LocationBadge />
-          <p className="hidden max-w-[280px] text-right text-[13px] leading-relaxed tracking-[0.04em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:block">
-            {dictionary.landing.heroLine}
-          </p>
-        </div>
-
-        <motion.h1
-          style={{ x: nameX }}
-          drag="x"
-          dragConstraints={{ left: -180, right: 180 }}
-          dragElastic={0.05}
-          className="cursor-grab font-display text-[18vw] leading-[0.8] tracking-[0.02em] text-white uppercase active:cursor-grabbing sm:text-[13vw]"
+      <div className="sticky top-0 h-svh min-h-[720px] overflow-hidden bg-canvas">
+        <motion.div
+          style={{ y: shouldReduceMotion ? 0 : backgroundY }}
+          className="absolute -inset-x-[3%] -inset-y-[16%]"
         >
-          {site.name}
-        </motion.h1>
+          <HeroParallax
+            progress={smoothProgress}
+            reducedMotion={Boolean(shouldReduceMotion)}
+          />
+        </motion.div>
+        <div className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/25 to-canvas/20" />
+
+        <div className="relative z-10 flex h-full flex-col justify-end px-5 pb-10 sm:px-12 sm:pb-14">
+          <div className="mb-10 flex items-end justify-between gap-6">
+            <LocationBadge />
+            <p className="hidden max-w-[280px] text-right text-[13px] leading-relaxed tracking-[0.04em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:block">
+              {dictionary.landing.heroLine}
+            </p>
+          </div>
+
+          <motion.h1
+            style={{ x: shouldReduceMotion ? 0 : nameX }}
+            drag="x"
+            dragConstraints={{ left: -180, right: 180 }}
+            dragElastic={0.05}
+            className="cursor-grab font-display text-[18vw] leading-[0.8] tracking-[0.02em] text-white uppercase active:cursor-grabbing sm:text-[13vw]"
+          >
+            {site.name}
+          </motion.h1>
+        </div>
       </div>
     </section>
   );
