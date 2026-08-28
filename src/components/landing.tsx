@@ -5,7 +5,6 @@ import {
   motion,
   useReducedMotion,
   useScroll,
-  useSpring,
   useTransform,
 } from "framer-motion";
 import { HeroParallax } from "@/components/hero-parallax";
@@ -20,34 +19,51 @@ export function Landing() {
     target: ref,
     offset: ["start start", "end end"],
   });
-  const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
+  const depthProgress = useTransform(scrollYProgress, (value) => {
+    const progress = Math.min(Math.max(value, 0), 1);
+    return 1 - (1 - progress) ** 3.4;
   });
-  const backgroundY = useTransform(smoothProgress, [0, 1], [0, 24]);
-  const nameX = useTransform(smoothProgress, [0, 1], [0, -80]);
+  const contentProgress = useTransform(scrollYProgress, (value) => {
+    const progress = Math.min(Math.max(value, 0), 1);
+    return progress ** 1.35;
+  });
+  const backgroundY = useTransform(contentProgress, [0, 1], [0, 48]);
+  const contentY = useTransform(contentProgress, [0, 1], [0, -160]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.78, 1], [1, 1, 0]);
+  const nameX = useTransform(contentProgress, [0, 1], [0, -120]);
+  const nameScale = useTransform(depthProgress, [0, 1], [1, 1.14]);
+  const vignetteOpacity = useTransform(depthProgress, [0, 0.35, 1], [0, 0.15, 0.55]);
   const shouldReduceMotion = useReducedMotion();
 
   return (
     <section
       id="home"
       ref={ref}
-      className="relative isolate h-[180svh] min-h-[1296px] bg-canvas motion-reduce:h-svh motion-reduce:min-h-[720px]"
+      className="relative isolate h-[240svh] min-h-[1728px] bg-canvas motion-reduce:h-svh motion-reduce:min-h-[720px]"
     >
       <div className="sticky top-0 h-svh min-h-[720px] overflow-hidden bg-canvas">
         <motion.div
           style={{ y: shouldReduceMotion ? 0 : backgroundY }}
-          className="absolute -inset-x-[3%] -inset-y-[16%]"
+          className="absolute -inset-x-[6%] -inset-y-[24%]"
         >
           <HeroParallax
-            progress={smoothProgress}
+            progress={depthProgress}
             reducedMotion={Boolean(shouldReduceMotion)}
           />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/25 to-canvas/20" />
+        <motion.div
+          style={{ opacity: shouldReduceMotion ? 0 : vignetteOpacity }}
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,transparent_18%,rgba(12,13,15,0.92)_100%)] motion-reduce:hidden"
+        />
 
-        <div className="relative z-10 flex h-full flex-col justify-end px-5 pb-10 sm:px-12 sm:pb-14">
+        <motion.div
+          style={{
+            y: shouldReduceMotion ? 0 : contentY,
+            opacity: shouldReduceMotion ? 1 : contentOpacity,
+          }}
+          className="relative z-10 flex h-full flex-col justify-end px-5 pb-10 sm:px-12 sm:pb-14"
+        >
           <div className="mb-10 flex items-end justify-between gap-6">
             <LocationBadge />
             <p className="hidden max-w-[280px] text-right text-[13px] leading-relaxed tracking-[0.04em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:block">
@@ -56,15 +72,18 @@ export function Landing() {
           </div>
 
           <motion.h1
-            style={{ x: shouldReduceMotion ? 0 : nameX }}
+            style={{
+              x: shouldReduceMotion ? 0 : nameX,
+              scale: shouldReduceMotion ? 1 : nameScale,
+            }}
             drag="x"
             dragConstraints={{ left: -180, right: 180 }}
             dragElastic={0.05}
-            className="cursor-grab font-display text-[18vw] leading-[0.8] tracking-[0.02em] text-white uppercase active:cursor-grabbing sm:text-[13vw]"
+            className="origin-bottom-left cursor-grab font-display text-[18vw] leading-[0.8] tracking-[0.02em] text-white uppercase active:cursor-grabbing sm:text-[13vw]"
           >
             {site.name}
           </motion.h1>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
