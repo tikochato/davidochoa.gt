@@ -105,7 +105,8 @@ function ParallaxLayer({
         fill
         sizes="100vw"
         quality={90}
-        priority
+        preload
+        fetchPriority="high"
         draggable={false}
         className="object-cover object-center"
       />
