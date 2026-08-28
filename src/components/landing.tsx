@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import {
   motion,
   useReducedMotion,
@@ -41,7 +42,7 @@ export function Landing() {
           y={volcanoY}
           scale={volcanoScale}
           zIndex={1}
-          insetClassName="inset-[-10%]"
+          insetClassName="inset-[-12%]"
         />
         <ParallaxLayer
           src="/images/hero-arch.webp"
@@ -98,12 +99,15 @@ function ParallaxLayer({
       className={`absolute origin-[50%_42%] ${insetClassName}`}
       style={{ y, scale, zIndex }}
     >
-      <img
+      <Image
         src={src}
         alt=""
-        className="h-full w-full object-cover object-center"
+        fill
+        sizes="100vw"
+        quality={90}
+        priority
         draggable={false}
-        fetchPriority="high"
+        className="object-cover object-center"
       />
     </motion.div>
   );
