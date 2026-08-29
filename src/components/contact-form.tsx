@@ -84,7 +84,7 @@ export function ContactForm() {
         />
       </Field>
 
-      <div className="absolute -left-[9999px]" aria-hidden="true">
+      <div className="sr-only" aria-hidden="true">
         <label htmlFor="contact-website">Website</label>
         <input
           id="contact-website"
