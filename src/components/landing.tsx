@@ -80,7 +80,7 @@ export function Landing() {
             drag="x"
             dragConstraints={{ left: -180, right: 180 }}
             dragElastic={0.05}
-            className="max-w-full origin-bottom-left cursor-grab font-display text-[18vw] leading-[0.8] tracking-[0.02em] text-white uppercase active:cursor-grabbing sm:text-[13vw]"
+            className="origin-bottom-left cursor-grab font-display text-[18vw] leading-[0.8] tracking-[0.02em] text-white uppercase active:cursor-grabbing sm:text-[13vw]"
           >
             {site.name}
           </motion.h1>
