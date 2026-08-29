@@ -22,7 +22,10 @@ export function SlidingImages() {
   const height = useTransform(scrollYProgress, [0.45, 0.92], [50, 0]);
 
   return (
-    <section ref={ref} className="relative z-20 bg-paper pt-8">
+    <section
+      ref={ref}
+      className="relative z-20 bg-paper pt-8 [clip-path:inset(-9999px_0)]"
+    >
       <div className="overflow-hidden">
         <motion.div style={{ x }} className="flex gap-8 pl-[8vw]">
           {slides.map((slide) => (

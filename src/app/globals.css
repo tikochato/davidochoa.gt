@@ -28,11 +28,16 @@ body {
   color: var(--foreground);
   font-family: var(--font-outfit), sans-serif;
   letter-spacing: 0.02em;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
   min-height: 100%;
-  overflow-x: hidden;
+  position: relative;
+  overscroll-behavior-x: none;
 }
 
 a {

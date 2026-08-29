@@ -62,7 +62,7 @@ export function Preloader() {
     <AnimatePresence mode="wait">
       {loading ? (
         <motion.div
-          className="fixed inset-0 z-[90] flex items-center justify-center bg-canvas text-white"
+          className="fixed inset-0 z-[90] flex items-center justify-center overflow-hidden bg-canvas text-white"
           variants={slideUp}
           initial="initial"
           exit="exit"

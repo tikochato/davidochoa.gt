@@ -45,7 +45,7 @@ export function Landing() {
       <div className="sticky top-0 h-svh min-h-[720px] overflow-hidden bg-canvas">
         <motion.div
           style={{ y: shouldReduceMotion ? 0 : backgroundY }}
-          className="absolute -inset-x-[6%] -inset-y-[24%]"
+          className="absolute inset-0 origin-center scale-x-[1.12] scale-y-[1.48]"
         >
           <HeroParallax
             progress={depthProgress}
@@ -63,7 +63,7 @@ export function Landing() {
             y: shouldReduceMotion ? 0 : contentY,
             opacity: shouldReduceMotion ? 1 : contentOpacity,
           }}
-          className="relative z-10 flex h-full flex-col justify-end px-5 pb-10 sm:px-12 sm:pb-14"
+          className="relative z-10 flex h-full min-w-0 flex-col justify-end px-5 pb-10 sm:px-12 sm:pb-14"
         >
           <div className="mb-10 flex items-end justify-between gap-6">
             <LocationBadge />

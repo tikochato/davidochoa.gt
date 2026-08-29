@@ -67,8 +67,9 @@ export function SmoothScroll() {
   }, [menuOpen, loading]);
 
   useEffect(() => {
-    document.documentElement.style.overflow = menuOpen || loading ? "hidden" : "";
-    document.body.style.overflow = menuOpen || loading ? "hidden" : "";
+    const locked = menuOpen || loading;
+    document.documentElement.style.overflowY = locked ? "hidden" : "";
+    document.body.style.overflowY = locked ? "hidden" : "";
   }, [menuOpen, loading]);
 
   return null;

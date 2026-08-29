@@ -21,11 +21,13 @@ export function AppShell({
   return (
     <LocaleProvider locale={locale} dictionary={dictionary}>
       <SiteProvider>
-        <SmoothScroll />
-        <Preloader />
-        <Header />
-        <Menu />
-        {children}
+        <div className="w-full overflow-x-clip">
+          <SmoothScroll />
+          <Preloader />
+          <Header />
+          <Menu />
+          {children}
+        </div>
       </SiteProvider>
     </LocaleProvider>
   );
