@@ -1,11 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { MotionValue } from "framer-motion";
 
-const HERO_IMAGE = "/images/hero.jpg";
-const HERO_DEPTH_MAP = "/images/hero/depth.webp";
+// Pre-built by scripts/optimize-images.mjs. Same 1800x1200 pixels as the
+// original, so the parallax push has exactly as much resolution as before;
+// only the container format changes. Served as static files, so no hosted
+// image-transformation quota is used.
+const HERO_IMAGE_AVIF = "/images/opt/hero.avif";
+const HERO_IMAGE_WEBP = "/images/opt/hero.webp";
+const HERO_IMAGE_FALLBACK = "/images/opt/hero.jpg";
+
+// Sampled once per mesh vertex on a mesh of at most 112x100, so 510x340 is
+// past the point the effect can resolve. Also keeps createDepthSampler's
+// getImageData buffer at ~0.7MB instead of ~8.6MB.
+const HERO_DEPTH_MAP = "/images/opt/hero-depth.webp";
 
 const VERTEX_SHADER = `
   attribute vec2 a_position;
@@ -78,6 +87,16 @@ export function HeroParallax({
   const imageRef = useRef<HTMLImageElement>(null);
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  // An <img> that is already complete when React attaches its handler never
+  // fires onLoad, which is the normal case on a warm cache or when the preload
+  // scanner finishes before hydration. next/image absorbed that internally; a
+  // plain <img> has to detect it, or the renderer below never initialises and
+  // the hero silently falls back to the static image.
+  const attachImage = useCallback((node: HTMLImageElement | null) => {
+    imageRef.current = node;
+    if (node?.complete && node.naturalWidth > 0) setImageLoaded(true);
+  }, []);
+
   useEffect(() => {
     const canvas = canvasRef.current;
     const image = imageRef.current;
@@ -133,16 +152,21 @@ export function HeroParallax({
 
   return (
     <div className="absolute inset-0 bg-canvas" aria-hidden="true">
-      <Image
-        ref={imageRef}
-        src={HERO_IMAGE}
-        alt=""
-        fill
-        preload
-        sizes="100vw"
-        onLoad={() => setImageLoaded(true)}
-        className="object-cover opacity-80 transition-opacity duration-500 motion-reduce:transition-none"
-      />
+      <picture className="contents">
+        <source type="image/avif" srcSet={HERO_IMAGE_AVIF} />
+        <source type="image/webp" srcSet={HERO_IMAGE_WEBP} />
+        <img
+          ref={attachImage}
+          src={HERO_IMAGE_FALLBACK}
+          alt=""
+          width={1800}
+          height={1200}
+          fetchPriority="high"
+          decoding="async"
+          onLoad={() => setImageLoaded(true)}
+          className="absolute inset-0 h-full w-full object-cover opacity-80 transition-opacity duration-500 motion-reduce:transition-none"
+        />
+      </picture>
       <canvas
         ref={canvasRef}
         className="absolute inset-0 h-full w-full opacity-0 transition-opacity duration-500 motion-reduce:hidden motion-reduce:transition-none"
