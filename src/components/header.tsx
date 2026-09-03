@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { motion, useMotionValueEvent, useScroll } from "framer-motion";
 import { LanguageSwitch } from "@/components/language-switch";
 import { Magnetic } from "@/components/magnetic";
 import { useLocale } from "@/components/locale-provider";
@@ -21,24 +22,33 @@ export function Header() {
   const { locale, dictionary } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [overHero, setOverHero] = useState(false);
+  const pathname = usePathname();
+  const { scrollY } = useScroll();
 
+  // Motion batches the scroll read, and setState only runs when the boolean
+  // actually flips, so this no longer re-renders on every scroll frame.
+  useMotionValueEvent(scrollY, "change", (y) => {
+    setScrolled((prev) => (prev ? y > SCROLL_OUT : y > SCROLL_IN));
+  });
+
+  // The hero starts at the top of the document, so "the hero still covers the
+  // strip under the header" is exactly "the hero intersects the viewport inset
+  // by HERO_CLEARANCE". Observing that costs no layout reads at all, where the
+  // old getBoundingClientRect() forced a reflow on every scroll event.
   useEffect(() => {
-    const update = () => {
-      const y = window.scrollY;
-      setScrolled((prev) => (prev ? y > SCROLL_OUT : y > SCROLL_IN));
-      const hero = document.getElementById("home");
-      setOverHero(
-        hero ? hero.getBoundingClientRect().bottom > HERO_CLEARANCE : false,
-      );
-    };
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    const hero = document.getElementById("home");
+    if (!hero) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setOverHero(entry.isIntersecting),
+      { rootMargin: `-${HERO_CLEARANCE}px 0px 0px 0px`, threshold: 0 },
+    );
+    observer.observe(hero);
     return () => {
-      window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      observer.disconnect();
+      // Routes without a hero (work, contact) fall back to the blended header.
+      setOverHero(false);
     };
-  }, []);
+  }, [pathname]);
 
   return (
     <header

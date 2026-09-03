@@ -34,29 +34,26 @@ export function ContactFooter() {
         </div>
 
         <div className="mt-24 flex flex-col gap-8 border-t border-white/15 pt-6 text-[12px] tracking-[0.08em] uppercase sm:flex-row sm:items-end sm:justify-between">
+          <p className="text-fog">{dictionary.contact.rights}</p>
           <div className="flex gap-12">
-            <div>
-              <p className="mb-2 text-fog">{dictionary.contact.version}</p>
-              <p>{dictionary.contact.edition}</p>
-            </div>
             <div>
               <p className="mb-2 text-fog">{dictionary.contact.localTime}</p>
               <LocalTime />
             </div>
-          </div>
-          <div>
-            <p className="mb-2 text-fog">{dictionary.contact.socials}</p>
-            <div className="flex gap-6">
-              {site.socials.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {social.label}
-                </a>
-              ))}
+            <div>
+              <p className="mb-2 text-fog">{dictionary.contact.socials}</p>
+              <div className="flex gap-6">
+                {site.socials.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {social.label}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>

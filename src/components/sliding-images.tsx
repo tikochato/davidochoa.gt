@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
 import { useLocale } from "@/components/locale-provider";
+import { ResponsiveImage } from "@/components/responsive-image";
 import { useMediaQuery } from "@/lib/use-media-query";
 
 const slides = [
@@ -65,11 +66,10 @@ export function SlidingImages() {
                   className="group block"
                 >
                   <div className="h-[210px] overflow-hidden rounded-[10px] sm:h-[300px] md:h-[360px]">
-                    <img
+                    <ResponsiveImage
                       src={slide.src}
                       alt={slide.name}
-                      loading="lazy"
-                      decoding="async"
+                      sizes="(min-width: 768px) 420px, 78vw"
                       className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
                     />
                   </div>
