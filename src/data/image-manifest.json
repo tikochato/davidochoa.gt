@@ -1,0 +1,235 @@
+{
+  "/images/8amotors.jpg": {
+    "width": 1625,
+    "height": 800,
+    "avif": [
+      {
+        "w": 480,
+        "src": "/images/opt/8amotors-480.avif"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/8amotors-800.avif"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/8amotors-1200.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "src": "/images/opt/8amotors-480.webp"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/8amotors-800.webp"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/8amotors-1200.webp"
+      }
+    ]
+  },
+  "/images/opaline.jpg": {
+    "width": 1620,
+    "height": 800,
+    "avif": [
+      {
+        "w": 480,
+        "src": "/images/opt/opaline-480.avif"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/opaline-800.avif"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/opaline-1200.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "src": "/images/opt/opaline-480.webp"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/opaline-800.webp"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/opaline-1200.webp"
+      }
+    ]
+  },
+  "/images/hirewar.jpg": {
+    "width": 1629,
+    "height": 800,
+    "avif": [
+      {
+        "w": 480,
+        "src": "/images/opt/hirewar-480.avif"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/hirewar-800.avif"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/hirewar-1200.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "src": "/images/opt/hirewar-480.webp"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/hirewar-800.webp"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/hirewar-1200.webp"
+      }
+    ]
+  },
+  "/images/slide-1.jpg": {
+    "width": 1725,
+    "height": 855,
+    "avif": [
+      {
+        "w": 480,
+        "src": "/images/opt/slide-1-480.avif"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/slide-1-800.avif"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/slide-1-1200.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "src": "/images/opt/slide-1-480.webp"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/slide-1-800.webp"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/slide-1-1200.webp"
+      }
+    ]
+  },
+  "/images/slide-2.jpg": {
+    "width": 855,
+    "height": 424,
+    "avif": [
+      {
+        "w": 480,
+        "src": "/images/opt/slide-2-480.avif"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/slide-2-800.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "src": "/images/opt/slide-2-480.webp"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/slide-2-800.webp"
+      }
+    ]
+  },
+  "/images/slide-3.jpg": {
+    "width": 1735,
+    "height": 855,
+    "avif": [
+      {
+        "w": 480,
+        "src": "/images/opt/slide-3-480.avif"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/slide-3-800.avif"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/slide-3-1200.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "src": "/images/opt/slide-3-480.webp"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/slide-3-800.webp"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/slide-3-1200.webp"
+      }
+    ]
+  },
+  "/images/slide-4.jpg": {
+    "width": 1733,
+    "height": 855,
+    "avif": [
+      {
+        "w": 480,
+        "src": "/images/opt/slide-4-480.avif"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/slide-4-800.avif"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/slide-4-1200.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 480,
+        "src": "/images/opt/slide-4-480.webp"
+      },
+      {
+        "w": 800,
+        "src": "/images/opt/slide-4-800.webp"
+      },
+      {
+        "w": 1200,
+        "src": "/images/opt/slide-4-1200.webp"
+      }
+    ]
+  },
+  "/images/hero.jpg": {
+    "width": 1800,
+    "height": 1200,
+    "avif": [
+      {
+        "w": 1800,
+        "src": "/images/opt/hero.avif"
+      }
+    ],
+    "webp": [
+      {
+        "w": 1800,
+        "src": "/images/opt/hero.webp"
+      }
+    ],
+    "fallback": "/images/opt/hero.jpg"
+  }
+}

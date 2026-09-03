@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ContactFooter } from "@/components/contact-footer";
+import { ResponsiveImage } from "@/components/responsive-image";
 import { projectHost, projects } from "@/data/projects";
 import { site } from "@/data/site";
 import { interpolate, localizeHref, type Locale } from "@/i18n/config";
@@ -44,9 +45,14 @@ export default async function WorkPage({ params }: PageProps<"/[locale]/work">) 
               className={index % 3 === 0 ? "md:col-span-2" : ""}
             >
               <div className="overflow-hidden rounded-[10px] bg-canvas">
-                <img
+                <ResponsiveImage
                   src={project.image}
                   alt={project.title}
+                  sizes={
+                    index % 3 === 0
+                      ? "100vw"
+                      : "(min-width: 768px) 50vw, 100vw"
+                  }
                   className={`w-full object-cover ${index % 3 === 0 ? "aspect-[16/8]" : "aspect-[4/5]"}`}
                 />
               </div>

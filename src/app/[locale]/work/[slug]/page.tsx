@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ContactFooter } from "@/components/contact-footer";
+import { ResponsiveImage } from "@/components/responsive-image";
 import { Magnetic } from "@/components/magnetic";
 import { RoundedButton } from "@/components/rounded-button";
 import {
@@ -55,9 +56,11 @@ export default async function ProjectPage({
 
       <div className="bg-paper px-5 pb-16 sm:px-16">
         <div className="overflow-hidden rounded-[10px]">
-          <img
+          <ResponsiveImage
             src={project.image}
             alt={project.title}
+            sizes="100vw"
+            priority
             className="aspect-[16/9] w-full object-cover"
           />
         </div>
