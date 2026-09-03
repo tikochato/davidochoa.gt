@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
+import { ResponsiveImage } from "@/components/responsive-image";
 import { featuredProjects, projectHost } from "@/data/projects";
 import { useMediaQuery } from "@/lib/use-media-query";
 
@@ -41,11 +42,10 @@ export function Gallery() {
               rel="noopener noreferrer"
               className="group relative aspect-[4/3] min-w-0 overflow-hidden rounded-[10px] sm:aspect-[4/5] sm:flex-1"
             >
-              <img
+              <ResponsiveImage
                 src={project.image}
                 alt={project.title}
-                loading="lazy"
-                decoding="async"
+                sizes="(min-width: 640px) 32vw, 100vw"
                 className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
               />
               <div className="absolute inset-0 bg-black/10 transition group-hover:bg-black/0" />
