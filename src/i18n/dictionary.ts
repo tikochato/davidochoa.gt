@@ -42,9 +42,9 @@ export const es = {
   },
   form: {
     nameLabel: "¿Cómo te llamas?",
-    namePlaceholder: "Juan Pérez *",
+    namePlaceholder: "Mariana Estrada *",
     emailLabel: "¿Cuál es tu correo?",
-    emailPlaceholder: "juan@correo.com *",
+    emailPlaceholder: "mariana@estudio.gt *",
     messageLabel: "Tu mensaje",
     messagePlaceholder: "Hola {name}, ¿me puedes ayudar con… *",
     send: "Enviar",
@@ -57,13 +57,14 @@ export const es = {
     label: "Trabajo",
     heading: "Proyectos seleccionados",
     intro:
-      "Sitios y productos enviados a producción — diseñados y construidos de punta a punta.",
+      "Sitios y productos enviados a producción, diseñados y construidos de punta a punta.",
     role: "Rol",
     location: "Ubicación",
     year: "Año",
     visit: "Visitar el sitio",
     next: "Siguiente proyecto",
     all: "Todo el trabajo",
+    more: "Más trabajo",
   },
   notFound: {
     error: "Error",
@@ -87,7 +88,7 @@ export const en = {
   meta: {
     role: "Senior Software Engineer",
     description:
-      "Independent senior software engineer. I help teams take products from intent to production — architecture, interfaces, and the systems underneath. Together we set a higher bar: considered, fast, and built to last.",
+      "Independent senior software engineer. I help teams take products from intent to production: architecture, interfaces, and the systems underneath. Together we set a higher bar: considered, fast, and built to last.",
     workDescription: "Selected design and development work by {name}.",
     contactDescription: "Start a project with {name}.",
   },
@@ -112,7 +113,7 @@ export const en = {
   about: {
     headline: "I help companies ship software they can keep.",
     description:
-      "Independent senior software engineer. I help teams take products from intent to production — architecture, interfaces, and the systems underneath. Together we set a higher bar: considered, fast, and built to last.",
+      "Independent senior software engineer. I help teams take products from intent to production: architecture, interfaces, and the systems underneath. Together we set a higher bar: considered, fast, and built to last.",
     about: "Based in Guatemala City. From first sketch to shipped build.",
   },
   contact: {
@@ -127,9 +128,9 @@ export const en = {
   },
   form: {
     nameLabel: "What's your name?",
-    namePlaceholder: "John Doe *",
+    namePlaceholder: "Marcus Delgado *",
     emailLabel: "What's your email?",
-    emailPlaceholder: "john@doe.com *",
+    emailPlaceholder: "marcus@studio.com *",
     messageLabel: "Your message",
     messagePlaceholder: "Hello {name}, can you help me with... *",
     send: "Send it",
@@ -142,13 +143,14 @@ export const en = {
     label: "Work",
     heading: "Selected projects",
     intro:
-      "Shipped sites and products — designed and built end to end.",
+      "Shipped sites and products, designed and built end to end.",
     role: "Role",
     location: "Location",
     year: "Year",
     visit: "Visit the site",
     next: "Next project",
     all: "All work",
+    more: "More work",
   },
   notFound: {
     error: "Error",

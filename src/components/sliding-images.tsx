@@ -1,49 +1,93 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
+import { useLocale } from "@/components/locale-provider";
+import { useMediaQuery } from "@/lib/use-media-query";
 
 const slides = [
-  {"src": "/images/slide-1.jpg", "link": "https://fundamentoenergetico.com.gt/"},
-  {"src": "/images/slide-2.jpg", "link": "http://capacitacionesguatemala.com.gt/"},
-  {"src": "/images/slide-3.jpg", "link": "https://siim.com.gt/"},
-  {"src": "/images/slide-4.jpg", "link": "https://tutorias.com.gt/"},
+  {
+    src: "/images/slide-1.jpg",
+    name: "Fundamento Energético",
+    link: "https://fundamentoenergetico.com.gt/",
+  },
+  {
+    src: "/images/slide-2.jpg",
+    name: "Capacitaciones Guatemala",
+    link: "http://capacitacionesguatemala.com.gt/",
+  },
+  {
+    src: "/images/slide-3.jpg",
+    name: "SIIM",
+    link: "https://siim.com.gt/",
+  },
+  {
+    src: "/images/slide-4.jpg",
+    name: "Tutorías GT",
+    link: "https://tutorias.com.gt/",
+  },
 ];
 
 export function SlidingImages() {
+  const { dictionary } = useLocale();
   const ref = useRef<HTMLElement>(null);
+  const isDesktop = useMediaQuery("(min-width: 768px)");
+  const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start end", "end start"],
   });
 
-  const x = useTransform(scrollYProgress, [0, 1], [0, -180]);
-  const height = useTransform(scrollYProgress, [0.45, 0.92], [50, 0]);
+  // Scroll drift reads as a slow pan across the shelf. It only runs where the
+  // track is clipped; on touch the row is swiped by hand instead.
+  const drift = useTransform(scrollYProgress, [0, 1], [40, -220]);
+  const x = isDesktop && !reduceMotion ? drift : 0;
 
   return (
-    <section
-      ref={ref}
-      className="relative z-20 bg-paper pt-8 [clip-path:inset(-9999px_0)]"
-    >
-      <div className="overflow-hidden">
-        <motion.div style={{ x }} className="flex gap-8 pl-[8vw]">
-          {slides.map((slide) => (
-            <div
-              key={slide.src}
-              className="relative h-[280px] w-[280px] shrink-0 overflow-hidden rounded-[10px] sm:h-[360px] sm:w-[420px]"
-            >
-              <Link href={slide.link} target="_blank" rel="noopener noreferrer">
-                <img src={slide.src} alt="" className="h-full w-full object-cover" />
-              </Link>
-            </div>
-          ))}
-        </motion.div>
-      </div>
+<section ref={ref} className="relative z-20">
+  <div className="bg-paper pt-10 pb-14 sm:pt-16 sm:pb-20">
+    <p className="mb-6 px-5 text-[12px] tracking-[0.16em] text-[#5a5a5a] uppercase sm:mb-10 sm:px-[8vw]">
+      {dictionary.work.more}
+    </p>
 
-      <motion.div style={{ height }} className="relative mt-12">
-        <div className="pointer-events-none absolute left-[-10%] h-[1550%] w-[120%] rounded-b-[50%] bg-paper shadow-[0px_60px_50px_rgba(0,0,0,0.55)]" />
-      </motion.div>
+    <div className="overflow-x-auto overscroll-x-contain pb-2 [scrollbar-width:none] md:overflow-x-hidden [&::-webkit-scrollbar]:hidden">
+      <motion.ul
+        style={{ x }}
+        className="flex snap-x snap-mandatory gap-4 px-5 md:snap-none md:gap-8 md:px-[8vw]"
+      >
+        {slides.map((slide) => (
+          <li key={slide.src} className="w-[78vw] max-w-[420px] shrink-0 snap-start md:w-[420px]">
+            <Link
+              href={slide.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block"
+            >
+              <div className="h-[210px] overflow-hidden rounded-[10px] sm:h-[300px] md:h-[360px]">
+                <img
+                  src={slide.src}
+                  alt={slide.name}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover transition duration-700 group-hover:scale-[1.04]"
+                />
+              </div>
+              <p className="mt-3 text-[12px] tracking-[0.08em] text-[#4a4a4a] uppercase">
+                {slide.name}
+              </p>
+            </Link>
+          </li>
+        ))}
+      </motion.ul>
+    </div>
+  </div>
+
+      {/* Paper arc curving away into the dark footer. Height is viewport-relative
+          and occupies real layout, so it can never blanket the section below. */}
+      <div className="relative h-[9vw] max-h-[110px] min-h-[42px]">
+        <div className="pointer-events-none absolute inset-x-[-10%] top-0 h-full rounded-b-[50%] bg-paper shadow-[0_40px_60px_-18px_rgba(0,0,0,0.65)]" />
+      </div>
     </section>
   );
 }

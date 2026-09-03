@@ -14,7 +14,6 @@ import { interpolate } from "@/i18n/config";
 
 export function Landing() {
   const { dictionary } = useLocale();
-  const reduceMotion = useReducedMotion() === true;
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
