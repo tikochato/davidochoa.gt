@@ -84,9 +84,12 @@ export function SlidingImages() {
       </div>
 
       {/* Paper arc curving away into the dark footer. Height is viewport-relative
-          and occupies real layout, so it can never blanket the section below. */}
+          and occupies real layout, so it can never blanket the section below.
+          Kept at exactly 100% width: anything wider adds horizontal scrollable
+          overflow, which the viewport pans on mobile and exposes the dark html
+          background down one edge. */}
       <div className="relative h-[9vw] max-h-[110px] min-h-[42px]">
-        <div className="pointer-events-none absolute inset-x-[-10%] top-0 h-full rounded-b-[50%] bg-paper shadow-[0_40px_60px_-18px_rgba(0,0,0,0.65)]" />
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-full rounded-b-[50%] bg-paper shadow-[0_40px_60px_-18px_rgba(0,0,0,0.65)]" />
       </div>
     </section>
   );
