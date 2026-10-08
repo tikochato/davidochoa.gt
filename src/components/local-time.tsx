@@ -7,7 +7,7 @@ import { localeIntl } from "@/i18n/config";
 
 export function LocalTime() {
   const { locale } = useLocale();
-  const [now, setNow] = useState("—");
+  const [now, setNow] = useState("--:--");
 
   useEffect(() => {
     function tick() {

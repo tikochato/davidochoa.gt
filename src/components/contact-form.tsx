@@ -59,6 +59,7 @@ export function ContactForm() {
         <input
           required
           name="name"
+          autoComplete="name"
           placeholder={dictionary.form.namePlaceholder}
           className="field-input"
         />
@@ -68,6 +69,7 @@ export function ContactForm() {
           required
           type="email"
           name="email"
+          autoComplete="email"
           placeholder={dictionary.form.emailPlaceholder}
           className="field-input"
         />
@@ -95,16 +97,13 @@ export function ContactForm() {
         />
       </div>
 
-      {status === "error" ? (
-        <p className="pt-6 text-[14px] text-red-300" role="alert">
-          {dictionary.form.error}
+      <div className="flex items-center justify-between gap-6 border-t border-white/15 pt-8">
+        <p className="max-w-[32ch] text-[14px] leading-relaxed text-red-300" role="alert">
+          {status === "error" ? dictionary.form.error : null}
         </p>
-      ) : null}
-
-      <div className="flex justify-end pt-10">
         <Magnetic>
           <RoundedButton
-            className="h-[180px] w-[180px] px-0 py-0"
+            className="h-[132px] w-[132px] shrink-0 px-0 py-0"
             disabled={status === "sending"}
           >
             {status === "sending" ? dictionary.form.sending : dictionary.form.send}
@@ -125,10 +124,15 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label className="block border-t border-white/15 py-7">
+    <label className="block border-t border-white/15 py-7 transition-colors duration-300 focus-within:border-white">
       <span className="mb-3 flex gap-4 text-[14px] tracking-[0.04em]">
         <span className="text-fog">{index}</span>
-        {label}
+        <span>
+          {label}{" "}
+          <span aria-hidden className="text-fog">
+            *
+          </span>
+        </span>
       </span>
       {children}
     </label>

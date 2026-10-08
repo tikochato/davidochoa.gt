@@ -51,82 +51,86 @@ export function Header() {
   }, [pathname]);
 
   return (
-    <header
-      className={cn(
-        "pointer-events-none fixed inset-x-0 top-0 z-50 text-white",
-        overHero
-          ? "[text-shadow:0_1px_10px_rgba(0,0,0,0.65)]"
-          : "mix-blend-difference",
-      )}
-    >
-      <div className="flex items-start justify-between px-5 pt-6 sm:px-10 sm:pt-8">
-        <Magnetic>
-          <Link
-            href={localizeHref(locale, "/", "#home")}
-            scroll={false}
-            className="pointer-events-auto text-[12px] leading-tight tracking-[0.06em] text-white"
-          >
-            {interpolate(dictionary.header.codeBy, { name: site.firstName })}
-          </Link>
-        </Magnetic>
-
-        <motion.nav
-          className={cn(
-            "hidden items-center gap-8 md:flex",
-            scrolled ? "pointer-events-none" : "pointer-events-auto",
-          )}
-          initial={false}
-          animate={{ opacity: scrolled ? 0 : 1, y: scrolled ? -12 : 0 }}
-          transition={{ duration: 0.5, ease }}
-          aria-hidden={scrolled}
-          inert={scrolled}
-        >
-          {dictionary.nav.map((item) => (
-            <Magnetic key={item.id}>
-              <Link
-                href={localizeHref(locale, "/", `#${item.id}`)}
-                scroll={false}
-                className="text-[12px] tracking-[0.08em] text-white"
-                tabIndex={scrolled ? -1 : undefined}
-              >
-                {item.label}
-              </Link>
-            </Magnetic>
-          ))}
-          <LanguageSwitch className="pointer-events-auto" />
-        </motion.nav>
-
-        <motion.div
-          className={cn(
-            "flex items-center gap-5 md:hidden",
-            scrolled ? "pointer-events-none" : "pointer-events-auto",
-          )}
-          initial={false}
-          animate={{ opacity: scrolled ? 0 : 1, y: scrolled ? -12 : 0 }}
-          transition={{ duration: 0.5, ease }}
-          aria-hidden={scrolled}
-          inert={scrolled}
-        >
-          <LanguageSwitch />
+    <>
+      <header
+        className={cn(
+          "pointer-events-none fixed inset-x-0 top-0 z-50 text-white",
+          overHero
+            ? "[text-shadow:0_1px_10px_rgba(0,0,0,0.65)]"
+            : "mix-blend-difference",
+        )}
+      >
+        <div className="flex items-start justify-between px-5 pt-6 sm:px-10 sm:pt-8">
           <Magnetic>
-            <button
-              type="button"
-              className="flex items-center gap-2 text-[12px] tracking-[0.08em] text-white"
-              onClick={() => setMenuOpen(!menuOpen)}
-              aria-expanded={menuOpen}
-              aria-label={dictionary.header.openMenu}
-              tabIndex={scrolled ? -1 : 0}
+            <Link
+              href={localizeHref(locale, "/", "#home")}
+              scroll={false}
+              className="pointer-events-auto text-[12px] leading-tight tracking-[0.06em] text-white"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-white" />
-              {dictionary.header.menu}
-            </button>
+              {interpolate(dictionary.header.codeBy, { name: site.firstName })}
+            </Link>
           </Magnetic>
-        </motion.div>
-      </div>
 
+          <motion.nav
+            className={cn(
+              "hidden items-center gap-8 md:flex",
+              scrolled ? "pointer-events-none" : "pointer-events-auto",
+            )}
+            initial={false}
+            animate={{ opacity: scrolled ? 0 : 1, y: scrolled ? -12 : 0 }}
+            transition={{ duration: 0.5, ease }}
+            aria-hidden={scrolled}
+            inert={scrolled}
+          >
+            {dictionary.nav.map((item) => (
+              <Magnetic key={item.id}>
+                <Link
+                  href={localizeHref(locale, "/", `#${item.id}`)}
+                  scroll={false}
+                  className="text-[12px] tracking-[0.08em] text-white"
+                  tabIndex={scrolled ? -1 : undefined}
+                >
+                  {item.label}
+                </Link>
+              </Magnetic>
+            ))}
+            <LanguageSwitch className="pointer-events-auto" />
+          </motion.nav>
+
+          <motion.div
+            className={cn(
+              "flex items-center gap-5 md:hidden",
+              scrolled ? "pointer-events-none" : "pointer-events-auto",
+            )}
+            initial={false}
+            animate={{ opacity: scrolled ? 0 : 1, y: scrolled ? -12 : 0 }}
+            transition={{ duration: 0.5, ease }}
+            aria-hidden={scrolled}
+            inert={scrolled}
+          >
+            <LanguageSwitch />
+            <Magnetic>
+              <button
+                type="button"
+                className="-my-2 flex items-center gap-2 py-2 text-[12px] tracking-[0.08em] text-white"
+                onClick={() => setMenuOpen(!menuOpen)}
+                aria-expanded={menuOpen}
+                aria-label={dictionary.header.openMenu}
+                tabIndex={scrolled ? -1 : 0}
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                {dictionary.header.menu}
+              </button>
+            </Magnetic>
+          </motion.div>
+        </div>
+      </header>
+
+      {/* Sits outside the header on purpose: inside its mix-blend-difference
+          group the button washed out to grey-on-grey over the paper sections. */}
       <motion.div
         className={cn(
-          "absolute top-5 right-5 origin-center sm:top-6 sm:right-8",
+          "fixed top-4 right-4 z-50 origin-center sm:top-5 sm:right-8",
           scrolled ? "pointer-events-auto" : "pointer-events-none",
         )}
         initial={false}
@@ -137,7 +141,7 @@ export function Header() {
         <Magnetic>
           <button
             type="button"
-            className="flex h-12 w-12 items-center justify-center rounded-full bg-white/15 text-white"
+            className="flex h-12 w-12 items-center justify-center rounded-full bg-canvas sm:h-14 sm:w-14 text-white shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] ring-1 ring-white/20 transition-colors duration-300 hover:bg-iris"
             onClick={() => setMenuOpen(!menuOpen)}
             aria-expanded={menuOpen}
             aria-label={dictionary.header.openMenu}
@@ -150,6 +154,6 @@ export function Header() {
           </button>
         </Magnetic>
       </motion.div>
-    </header>
+    </>
   );
 }

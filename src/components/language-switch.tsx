@@ -28,7 +28,7 @@ export function LanguageSwitch({ className }: { className?: string }) {
               locale: dictionary.locale.name[item],
             })}
             className={cn(
-              "transition-opacity",
+              "-my-2 py-2 transition-opacity",
               active ? "opacity-100" : "opacity-45 hover:opacity-100",
             )}
           >

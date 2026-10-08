@@ -122,8 +122,8 @@ function LocationBadge() {
           ✦
         </span>
       </div>
-      <p className="max-w-[9rem] text-[12px] leading-snug tracking-[0.04em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:hidden">
-        {located}
+      <p className="max-w-[9rem] text-[13px] leading-snug tracking-[0.04em] text-white [text-shadow:0_1px_10px_rgba(0,0,0,0.65)] sm:hidden">
+        {dictionary.meta.role}
       </p>
     </div>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
@@ -45,6 +46,15 @@ export function Menu() {
   const pathname = usePathname();
   const onHome = stripLocalePrefix(pathname) === "/";
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen, setMenuOpen]);
+
   return (
     <AnimatePresence>
       {menuOpen ? (
@@ -60,7 +70,7 @@ export function Menu() {
             onClick={() => setMenuOpen(false)}
           />
           <motion.aside
-            className="fixed top-0 right-0 z-[70] flex h-screen w-full max-w-[520px] flex-col justify-between bg-canvas px-10 py-10 text-white sm:px-16"
+            className="fixed top-0 right-0 z-[70] flex h-dvh w-full max-w-[520px] flex-col justify-between bg-canvas px-10 py-10 text-white sm:px-16"
             variants={panel}
             initial="initial"
             animate="enter"

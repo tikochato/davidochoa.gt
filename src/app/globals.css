@@ -50,6 +50,11 @@ img {
   display: block;
 }
 
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
 .field-input {
   width: 100%;
   background: transparent;
@@ -61,7 +66,7 @@ img {
 }
 
 .field-input::placeholder {
-  color: #5c5d60;
+  color: #8a8d90;
 }
 
 .field-input option {

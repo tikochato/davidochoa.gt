@@ -16,13 +16,18 @@ export function ContactFooter() {
       <div className="mx-auto max-w-[1400px]">
         <div className="grid gap-16 lg:grid-cols-[1fr_1.1fr] lg:items-start">
           <div>
-            <h2 className="max-w-[12ch] font-display text-[58px] leading-[0.95] tracking-[0.02em] sm:text-[92px]">
+            <h2 className="max-w-[12ch] font-display text-[58px] leading-[0.95] tracking-[-0.02em] sm:text-[92px]">
               {dictionary.contact.heading}
             </h2>
             <div className="mt-12 space-y-6 text-[14px] tracking-[0.04em]">
               <div>
                 <p className="mb-2 text-fog uppercase">{dictionary.contact.email}</p>
-                <a href={`mailto:${site.email}`}>{site.email}</a>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="text-[18px] underline decoration-white/30 underline-offset-4 transition-colors hover:decoration-white"
+                >
+                  {site.email}
+                </a>
               </div>
               <div>
                 <p className="mb-2 text-fog uppercase">{dictionary.contact.location}</p>

@@ -49,7 +49,7 @@ export function RoundedButton({
   );
 
   const classes = cn(
-    "relative flex cursor-pointer items-center justify-center overflow-hidden rounded-full px-8 py-5 text-[15px] tracking-[0.04em]",
+    "relative flex cursor-pointer items-center justify-center overflow-hidden rounded-full px-8 py-5 text-[15px] tracking-[0.04em] transition-transform duration-200 active:scale-[0.97]",
     dark ? "bg-[#1c1d20] text-white" : "bg-white text-canvas",
     disabled ? "cursor-wait opacity-70" : undefined,
     className,
