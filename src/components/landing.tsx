@@ -7,7 +7,7 @@ import {
   useScroll,
   useTransform,
 } from "framer-motion";
-import { HeroParallax } from "@/components/hero-parallax";
+import { HeroSequence } from "@/components/hero-sequence";
 import { useLocale } from "@/components/locale-provider";
 import { site } from "@/data/site";
 import { interpolate } from "@/i18n/config";
@@ -19,42 +19,38 @@ export function Landing() {
     target: ref,
     offset: ["start start", "end end"],
   });
-  const depthProgress = useTransform(scrollYProgress, (value) => {
-    const progress = Math.min(Math.max(value, 0), 1);
-    return 1 - (1 - progress) ** 3.4;
-  });
-  const contentProgress = useTransform(scrollYProgress, (value) => {
-    const progress = Math.min(Math.max(value, 0), 1);
-    return progress ** 1.35;
-  });
-  const backgroundY = useTransform(contentProgress, [0, 1], [0, 48]);
-  const contentY = useTransform(contentProgress, [0, 1], [0, -160]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.78, 1], [1, 1, 0]);
-  const nameX = useTransform(contentProgress, [0, 1], [0, -120]);
-  const nameScale = useTransform(depthProgress, [0, 1], [1, 1.14]);
-  const vignetteOpacity = useTransform(depthProgress, [0, 0.35, 1], [0, 0.15, 0.55]);
+  // Frames follow scroll linearly: the video already carries its own easing,
+  // and the last frame lands exactly as the sticky stage releases, so the next
+  // section only starts once the whole flight has played.
+  // The function transform also keeps framer-motion off its accelerated
+  // ScrollTimeline path, which maps multi-stop opacity ranges incorrectly.
+  const progress = useTransform(scrollYProgress, (value) =>
+    Math.min(Math.max(value, 0), 1),
+  );
+  const contentY = useTransform(progress, [0, 0.3], [0, -120]);
+  const contentOpacity = useTransform(progress, [0, 0.08, 0.3], [1, 1, 0]);
+  const nameX = useTransform(progress, [0, 0.3], [0, -80]);
+  const nameScale = useTransform(progress, [0, 0.3], [1, 1.08]);
+  const shadeOpacity = useTransform(progress, [0, 0.3, 0.85, 1], [1, 0.35, 0.35, 0.8]);
   const shouldReduceMotion = useReducedMotion();
 
   return (
     <section
       id="home"
       ref={ref}
-      className="relative isolate h-[240svh] min-h-[1728px] bg-canvas motion-reduce:h-svh motion-reduce:min-h-[720px]"
+      className="relative isolate h-[400svh] bg-canvas motion-reduce:h-svh motion-reduce:min-h-[720px]"
     >
       <div className="sticky top-0 h-svh min-h-[720px] overflow-hidden bg-canvas">
+        <HeroSequence
+          progress={progress}
+          reducedMotion={Boolean(shouldReduceMotion)}
+        />
+        {/* Keeps the name legible over the street, then thins out so the
+            flight reads clearly, and settles back in to hand over to the next
+            section. */}
         <motion.div
-          style={{ y: shouldReduceMotion ? 0 : backgroundY }}
-          className="absolute inset-0 origin-center scale-x-[1.12] scale-y-[1.48]"
-        >
-          <HeroParallax
-            progress={depthProgress}
-            reducedMotion={Boolean(shouldReduceMotion)}
-          />
-        </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-t from-canvas via-canvas/25 to-canvas/20" />
-        <motion.div
-          style={{ opacity: shouldReduceMotion ? 0 : vignetteOpacity }}
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_38%,transparent_18%,rgba(12,13,15,0.92)_100%)] motion-reduce:hidden"
+          style={{ opacity: shouldReduceMotion ? 1 : shadeOpacity }}
+          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-canvas via-canvas/25 to-canvas/20"
         />
 
         <motion.div
