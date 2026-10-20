@@ -8,7 +8,7 @@ export type Project = {
   link: string;
 };
 
-export function projectHost(project: Project) {
+export function projectHost(project: { link: string }) {
   return new URL(project.link).hostname.replace(/^www\./, "");
 }
 
@@ -53,3 +53,33 @@ export function getNextProject(slug: string) {
   if (index === -1) return projects[0];
   return projects[(index + 1) % projects.length];
 }
+
+export type ShelfProject = {
+  title: string;
+  image: string;
+  link: string;
+};
+
+// Smaller builds shown on the "More work" shelf below the featured grid.
+export const moreProjects: ShelfProject[] = [
+  {
+    title: "Fundamento Energético",
+    image: "/images/slide-1.jpg",
+    link: "https://fundamentoenergetico.com.gt/",
+  },
+  {
+    title: "Capacitaciones Guatemala",
+    image: "/images/slide-2.jpg",
+    link: "http://capacitacionesguatemala.com.gt/",
+  },
+  {
+    title: "SIIM",
+    image: "/images/slide-3.jpg",
+    link: "https://siim.com.gt/",
+  },
+  {
+    title: "Tutorías GT",
+    image: "/images/slide-4.jpg",
+    link: "https://tutorias.com.gt/",
+  },
+];

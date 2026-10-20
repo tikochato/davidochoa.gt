@@ -2,6 +2,7 @@
 
 import { FormEvent, useState } from "react";
 import { Magnetic } from "@/components/magnetic";
+import { Reveal } from "@/components/reveal";
 import { RoundedButton } from "@/components/rounded-button";
 import { useLocale } from "@/components/locale-provider";
 import { site } from "@/data/site";
@@ -45,7 +46,9 @@ export function ContactForm() {
   if (status === "sent") {
     return (
       <div className="rounded-[10px] bg-white/5 p-10" role="status">
-        <h2 className="font-display text-[40px]">{dictionary.form.sentTitle}</h2>
+        <h2 className="font-display text-[40px]">
+          {dictionary.form.sentTitle}
+        </h2>
         <p className="mt-4 max-w-[40ch] text-[16px] leading-relaxed text-white/70">
           {dictionary.form.sentBody}
         </p>
@@ -97,19 +100,26 @@ export function ContactForm() {
         />
       </div>
 
-      <div className="flex items-center justify-between gap-6 border-t border-white/15 pt-8">
-        <p className="max-w-[32ch] text-[14px] leading-relaxed text-red-300" role="alert">
-          {status === "error" ? dictionary.form.error : null}
-        </p>
-        <Magnetic>
-          <RoundedButton
-            className="h-[132px] w-[132px] shrink-0 px-0 py-0"
-            disabled={status === "sending"}
+      <Reveal delay={0.4} y={20}>
+        <div className="flex items-center justify-between gap-6 border-t border-white/15 pt-8">
+          <p
+            className="max-w-[32ch] text-[14px] leading-relaxed text-red-300"
+            role="alert"
           >
-            {status === "sending" ? dictionary.form.sending : dictionary.form.send}
-          </RoundedButton>
-        </Magnetic>
-      </div>
+            {status === "error" ? dictionary.form.error : null}
+          </p>
+          <Magnetic>
+            <RoundedButton
+              className="h-[132px] w-[132px] shrink-0 px-0 py-0"
+              disabled={status === "sending"}
+            >
+              {status === "sending"
+                ? dictionary.form.sending
+                : dictionary.form.send}
+            </RoundedButton>
+          </Magnetic>
+        </div>
+      </Reveal>
     </form>
   );
 }
@@ -124,17 +134,19 @@ function Field({
   children: React.ReactNode;
 }) {
   return (
-    <label className="block border-t border-white/15 py-7 transition-colors duration-300 focus-within:border-white">
-      <span className="mb-3 flex gap-4 text-[14px] tracking-[0.04em]">
-        <span className="text-fog">{index}</span>
-        <span>
-          {label}{" "}
-          <span aria-hidden className="text-fog">
-            *
+    <Reveal delay={0.1 + Number(index) * 0.08} y={20}>
+      <label className="block border-t border-white/15 py-7 transition-colors duration-300 focus-within:border-white">
+        <span className="mb-3 flex gap-4 text-[14px] tracking-[0.04em]">
+          <span className="text-fog">{index}</span>
+          <span>
+            {label}{" "}
+            <span aria-hidden className="text-fog">
+              *
+            </span>
           </span>
         </span>
-      </span>
-      {children}
-    </label>
+        {children}
+      </label>
+    </Reveal>
   );
 }
