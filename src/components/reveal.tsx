@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import type { ReactNode } from "react";
 import { cn } from "@/lib/cn";
 
-// Same curve the menu, header and preloader use, so every entrance on the
+// Same curve the menu and header use, so every entrance on the
 // site shares one rhythm.
 export const revealEase = [0.76, 0, 0.24, 1] as const;
 const softEase = [0.16, 1, 0.3, 1] as const;

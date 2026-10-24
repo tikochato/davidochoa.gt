@@ -14,12 +14,10 @@ export function scrollToHash(hash: string) {
 }
 
 export function SmoothScroll() {
-  const { menuOpen, loading } = useSite();
+  const { menuOpen } = useSite();
   const pathname = usePathname();
 
   useEffect(() => {
-    if (loading) return;
-
     const lenis = new Lenis({
       duration: 1.15,
       smoothWheel: true,
@@ -55,22 +53,21 @@ export function SmoothScroll() {
         lenisInstance = null;
       }
     };
-  }, [loading, pathname]);
+  }, [pathname]);
 
   useEffect(() => {
     if (!lenisInstance) return;
-    if (menuOpen || loading) {
+    if (menuOpen) {
       lenisInstance.stop();
     } else {
       lenisInstance.start();
     }
-  }, [menuOpen, loading]);
+  }, [menuOpen]);
 
   useEffect(() => {
-    const locked = menuOpen || loading;
-    document.documentElement.style.overflowY = locked ? "hidden" : "";
-    document.body.style.overflowY = locked ? "hidden" : "";
-  }, [menuOpen, loading]);
+    document.documentElement.style.overflowY = menuOpen ? "hidden" : "";
+    document.body.style.overflowY = menuOpen ? "hidden" : "";
+  }, [menuOpen]);
 
   return null;
 }

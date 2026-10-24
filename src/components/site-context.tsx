@@ -12,19 +12,16 @@ import {
 type SiteContextValue = {
   menuOpen: boolean;
   setMenuOpen: (open: boolean) => void;
-  loading: boolean;
-  setLoading: (loading: boolean) => void;
 };
 
 const SiteContext = createContext<SiteContextValue | null>(null);
 
 export function SiteProvider({ children }: { children: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
 
   const value = useMemo(
-    () => ({ menuOpen, setMenuOpen, loading, setLoading }),
-    [menuOpen, loading],
+    () => ({ menuOpen, setMenuOpen }),
+    [menuOpen],
   );
 
   return <SiteContext.Provider value={value}>{children}</SiteContext.Provider>;
